@@ -1,92 +1,166 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="system">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f7f5" />
+
     <!-- Primary Meta Tags -->
-    <title>Gilson Mendes - Coach Sportif Côte d'Azur | Transformation Physique & Bien-être</title>
-    <meta name="title" content="Gilson Mendes - Coach Sportif Côte d'Azur | Transformation Physique & Bien-être" />
-    <meta name="description" content="Coach sportif diplômé sur la Côte d'Azur. Coaching individuel, collectif, programmes en ligne. Transformez votre corps avec une approche holistique. Séance découverte gratuite !" />
-    <meta name="keywords" content="coach sportif, Côte d'Azur, Mouans-Sartoux, Cannes, Grasse, Valbonne, Sophia Antipolis, personal trainer, fitness, musculation, perte de poids, transformation physique, Gilson Mendes" />
+    <title>Gilson Mendes — Coach Sportif Côte d'Azur | Transformation Physique</title>
+    <meta name="title" content="Gilson Mendes — Coach Sportif Côte d'Azur | Transformation Physique" />
+    <meta name="description" content="Coach sportif diplômé sur la Côte d'Azur. Coaching individuel, collectif et programmes en ligne. Approche holistique corps-esprit. Séance découverte gratuite." />
+    <meta name="keywords" content="coach sportif, personal trainer, Côte d'Azur, Mouans-Sartoux, Cannes, Grasse, musculation, perte de poids, Gilson Mendes, GML Fitness" />
     <meta name="author" content="Gilson Mendes" />
     <meta name="robots" content="index, follow" />
-    
-    <!-- Open Graph / Facebook / WhatsApp / Messenger -->
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jonasvihoaleaniglo.github.io/gmfitness-website/" />
-    <meta property="og:title" content="Gilson Mendes - Coach Sportif Côte d'Azur" />
-    <meta property="og:description" content="Coach sportif diplômé sur la Côte d'Azur. Coaching personnalisé, transformation physique et bien-être. Séance découverte gratuite ! 📞 06 17 04 35 99" />
+    <meta property="og:title" content="Gilson Mendes — Coach Sportif Côte d'Azur" />
+    <meta property="og:description" content="Coaching personnalisé, transformation physique et bien-être sur la Côte d'Azur. Séance découverte gratuite — 06 17 04 35 99" />
     <meta property="og:image" content="https://jonasvihoaleaniglo.github.io/gmfitness-website/preview-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Gilson Mendes - Coach Sportif Côte d'Azur" />
-    <meta property="og:site_name" content="Gilson Mendes Coaching" />
+    <meta property="og:image:alt" content="Gilson Mendes — Coach sportif professionnel Côte d'Azur" />
+    <meta property="og:site_name" content="GML Fitness — Gilson Mendes" />
     <meta property="og:locale" content="fr_FR" />
-    
-    <!-- Twitter Cards -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://jonasvihoaleaniglo.github.io/gmfitness-website/" />
-    <meta property="twitter:title" content="Gilson Mendes - Coach Sportif Côte d'Azur" />
-    <meta property="twitter:description" content="Coach sportif diplômé sur la Côte d'Azur. Coaching personnalisé, transformation physique et bien-être. Séance découverte gratuite !" />
-    <meta property="twitter:image" content="https://jonasvihoaleaniglo.github.io/gmfitness-website/preview-image.jpg" />
-    <meta property="twitter:image:alt" content="Gilson Mendes - Coach Sportif Côte d'Azur" />
-    
-    <!-- WhatsApp specific -->
     <meta property="og:phone_number" content="+33617043599" />
-    
-    <!-- Additional SEO -->
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://jonasvihoaleaniglo.github.io/gmfitness-website/" />
+    <meta name="twitter:title" content="Gilson Mendes — Coach Sportif Côte d'Azur" />
+    <meta name="twitter:description" content="Coaching personnalisé, transformation physique et bien-être. Séance découverte gratuite." />
+    <meta name="twitter:image" content="https://jonasvihoaleaniglo.github.io/gmfitness-website/preview-image.jpg" />
+    <meta name="twitter:image:alt" content="Gilson Mendes — Coach sportif Côte d'Azur" />
+
+    <!-- SEO geo -->
     <link rel="canonical" href="https://jonasvihoaleaniglo.github.io/gmfitness-website/" />
     <meta name="geo.region" content="FR-06" />
-    <meta name="geo.placename" content="Côte d'Azur, France" />
+    <meta name="geo.placename" content="Mouans-Sartoux, Côte d'Azur, France" />
     <meta name="geo.position" content="43.5528;7.0174" />
     <meta name="ICBM" content="43.5528, 7.0174" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Prevent theme flash before React hydrates -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var mode = stored ? JSON.parse(stored) : 'system';
+          var dark = mode === 'dark' || (mode !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+          if (dark) document.documentElement.classList.add('dark');
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', dark ? '#0d0d0d' : '#f7f7f5');
+        } catch (e) { /* noop */ }
+      })();
+    </script>
+
+    <!-- JSON-LD LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://jonasvihoaleaniglo.github.io/gmfitness-website/#business",
+      "name": "GML Fitness — Gilson Mendes",
+      "description": "Coach sportif diplômé sur la Côte d'Azur. Coaching individuel, collectif, programmes en ligne et accompagnement holistique.",
+      "url": "https://jonasvihoaleaniglo.github.io/gmfitness-website/",
+      "telephone": "+33617043599",
+      "email": "gilson.mendes-landim@hotmail.com",
+      "image": "https://jonasvihoaleaniglo.github.io/gmfitness-website/preview-image.jpg",
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mouans-Sartoux",
+        "postalCode": "06370",
+        "addressRegion": "Provence-Alpes-Côte d'Azur",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.5528,
+        "longitude": 7.0174
+      },
+      "areaServed": [
+        "Mouans-Sartoux",
+        "Cannes",
+        "Grasse",
+        "Valbonne",
+        "Sophia Antipolis",
+        "Côte d'Azur"
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "07:00",
+        "closes": "21:00"
+      },
+      "sameAs": [
+        "https://instagram.com/gilsonmendes_coach",
+        "https://www.youtube.com/@Gilson.Mendes-Fitness"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services de coaching",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Coaching individuel",
+              "description": "Séances personnalisées à domicile ou en extérieur sur la Côte d'Azur"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Coaching collectif",
+              "description": "Séances en petit groupe, maximum 5 personnes"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Séance découverte gratuite",
+              "description": "Bilan physique complet et plan personnalisé sans engagement"
+            },
+            "price": "0",
+            "priceCurrency": "EUR"
+          }
+        ]
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    
-    <!-- Sendinblue/Brevo Newsletter Scripts -->
+
+    <!-- Sendinblue/Brevo newsletter (unchanged integration) -->
     <script>
       window.REQUIRED_CODE_ERROR_MESSAGE = 'Veuillez choisir un code pays';
       window.LOCALE = 'fr';
       window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Les informations que vous avez fournies ne sont pas valides. Veuillez vérifier le format du champ et réessayer.";
       window.REQUIRED_ERROR_MESSAGE = "Vous devez renseigner ce champ. ";
       window.GENERIC_INVALID_MESSAGE = "Les informations que vous avez fournies ne sont pas valides. Veuillez vérifier le format du champ et réessayer.";
-      
       window.translation = {
-          common: {
-              selectedList: '{quantity} liste sélectionnée',
-              selectedLists: '{quantity} listes sélectionnées',
-              selectedOption: '{quantity} sélectionné',
-              selectedOptions: '{quantity} sélectionnés',
-          }
+        common: {
+          selectedList: '{quantity} liste sélectionnée',
+          selectedLists: '{quantity} listes sélectionnées',
+          selectedOption: '{quantity} sélectionné',
+          selectedOptions: '{quantity} sélectionnés',
+        }
       };
-
       var AUTOHIDE = Boolean(0);
     </script>
-    
-    <script>
-      ;(function (d, s, c) {
-          var j = d.createElement(s),
-            t = d.getElementsByTagName(s)[0]
-          j.src = "https://sibforms.com/forms/end-form/elastic-apm-rum.umd.min.js"
-          j.onload = function () { 
-            if (typeof elasticApm !== 'undefined') {
-              elasticApm.init(c) 
-            }
-          }
-          t.parentNode.insertBefore(j, t)
-      })(document, 'script', { 
-        serviceName: 'End Forms', 
-        serverUrl: 'https://596808a16dec4fc39413bf34b0a70240.apm.eu-west-1.aws.cloud.es.io:443', 
-        environment: 'production'
-      })
-    </script>
-
     <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
   </body>
 </html>

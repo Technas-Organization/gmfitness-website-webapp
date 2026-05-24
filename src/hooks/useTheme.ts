@@ -46,7 +46,7 @@ export function useTheme() {
       // Met à jour la meta theme-color pour les navigateurs mobiles
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
       if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', resolved === 'dark' ? '#1f2937' : '#ffffff');
+        metaThemeColor.setAttribute('content', resolved === 'dark' ? '#0d0d0d' : '#f7f7f5');
       }
     }
   }, [storedTheme, detectSystemTheme]);

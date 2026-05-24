@@ -199,27 +199,22 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-br from-ocean-50/80 to-azure-100/80 dark:from-ocean-900/80 dark:to-azure-800/80 backdrop-blur-sm">
+    <section id="contact" className="section-padding section-muted" aria-labelledby="contact-heading">
       <div className="container-max">
-        <motion.div
-          className="text-center mb-8 lg:mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 lg:mb-6">
-            Commençons Votre <span className="text-primary-600 dark:text-primary-400">Transformation</span>
+        <header className="section-header reveal">
+          <p className="section-eyebrow">Contact</p>
+          <h2 id="contact-heading" className="section-title">
+            Commençons votre <span className="text-accent">transformation</span>
           </h2>
-          <p className="text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4">
-            Prêt à atteindre vos objectifs ? Contactez-moi dès maintenant pour une séance découverte gratuite.
+          <p className="section-subtitle">
+            Prêt à atteindre vos objectifs ? Contactez-moi pour une séance découverte gratuite.
           </p>
-        </motion.div>
+        </header>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Formulaire de contact */}
           <motion.div
-            className="bg-gray-50 dark:bg-gray-700 rounded-2xl p-6 lg:p-8"
+            className="card p-6 lg:p-8 reveal"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -231,7 +226,7 @@ const Contact = () => {
             
             <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="name" className="form-label">
                   Nom complet *
                 </label>
                 <input

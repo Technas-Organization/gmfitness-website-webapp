@@ -1,158 +1,137 @@
-import { motion } from "framer-motion";
 import { useI18n } from '@/hooks/useI18n';
+
+const COACH_PORTRAIT =
+  'https://img.youtube.com/vi/NdcT_AjbnGM/maxresdefault.jpg';
 
 const About = () => {
   const { t } = useI18n();
 
   const achievements = [
-    { 
-      icon: "🏆", 
-      titleKey: "about.achievements.certifications.title",
+    {
+      icon: '🏆',
+      titleKey: 'about.achievements.certifications.title',
       itemsKeys: [
-        "about.achievements.certifications.items.0",
-        "about.achievements.certifications.items.1", 
-        "about.achievements.certifications.items.2"
-      ]
+        'about.achievements.certifications.items.0',
+        'about.achievements.certifications.items.1',
+        'about.achievements.certifications.items.2',
+      ],
     },
-    { 
-      icon: "🎯", 
-      titleKey: "about.achievements.specializations.title",
+    {
+      icon: '🎯',
+      titleKey: 'about.achievements.specializations.title',
       itemsKeys: [
-        "about.achievements.specializations.items.0",
-        "about.achievements.specializations.items.1",
-        "about.achievements.specializations.items.2",
-        "about.achievements.specializations.items.3"
-      ]
+        'about.achievements.specializations.items.0',
+        'about.achievements.specializations.items.1',
+        'about.achievements.specializations.items.2',
+        'about.achievements.specializations.items.3',
+      ],
     },
-    { 
-      icon: "💪", 
-      titleKey: "about.achievements.philosophy.title",
+    {
+      icon: '💪',
+      titleKey: 'about.achievements.philosophy.title',
       itemsKeys: [
-        "about.achievements.philosophy.items.0",
-        "about.achievements.philosophy.items.1",
-        "about.achievements.philosophy.items.2"
-      ]
-    }
+        'about.achievements.philosophy.items.0',
+        'about.achievements.philosophy.items.1',
+        'about.achievements.philosophy.items.2',
+      ],
+    },
   ];
 
   return (
-    <section id="about" className="section-padding bg-gradient-to-br from-azure-50/70 to-mediterranean-50/70 dark:from-azure-900/70 dark:to-mediterranean-900/70 backdrop-blur-sm">
+    <section id="about" className="section-padding section-muted" aria-labelledby="about-heading">
       <div className="container-max">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              {t('about.title', 'À Propos de')} <span className="text-primary-600 dark:text-primary-400">
-                {t('about.titleHighlight', 'Moi')}
-              </span>
-            </h2>
-            
-            <div className="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="reveal">
+            <header className="mb-8">
+              <p className="section-eyebrow">{t('about.eyebrow', 'Votre coach')}</p>
+              <h2 id="about-heading" className="section-title text-left">
+                {t('about.title', 'À propos de')}{' '}
+                <span className="text-accent">{t('about.titleHighlight', 'Gilson')}</span>
+              </h2>
+            </header>
+
+            <div className="space-y-5 text-[var(--color-text-muted)] leading-relaxed">
               <p>
-                {t('about.bio.p1', 'Passionné de sport depuis toujours, j\'ai fait de ma passion mon métier il y a 8 ans. Diplômé BPJEPS et certifié en nutrition sportive, j\'accompagne mes clients vers leurs objectifs avec une approche personnalisée et bienveillante.')}
+                {t(
+                  'about.bio.p1',
+                  "Passionné de sport depuis toujours, j'ai fait de ma passion mon métier il y a 8 ans. Diplômé BPJEPS et certifié en nutrition sportive, j'accompagne mes clients avec une approche personnalisée et bienveillante."
+                )}
               </p>
-              
               <p>
-                {t('about.bio.p2', 'Ma philosophie ? ')}<strong className="text-gray-900 dark:text-white">
+                {t('about.bio.p2', 'Ma philosophie ? ')}
+                <strong className="text-[var(--color-text)]">
                   {t('about.bio.unique', 'Chaque personne est unique')}
                 </strong>{' '}
-                {t('about.bio.p2_continue', 'et mérite un accompagnement sur-mesure. Que vous souhaitiez perdre du poids, gagner en muscle ou simplement vous sentir mieux dans votre corps, nous trouverons ensemble la méthode qui vous convient.')}
+                {t(
+                  'about.bio.p2_continue',
+                  'et mérite un accompagnement sur-mesure. Que vous souhaitiez perdre du poids, gagner en muscle ou simplement vous sentir mieux, nous trouverons ensemble la méthode qui vous convient.'
+                )}
               </p>
-              
               <p>
-                {t('about.bio.p3', 'Au-delà des séances d\'entraînement, je vous accompagne dans votre changement de vie : nutrition, motivation, habitudes… pour des résultats durables et un bien-être global.')}
+                {t(
+                  'about.bio.p3',
+                  "Au-delà des séances, je vous accompagne dans votre changement de vie : nutrition, motivation, habitudes… pour des résultats durables."
+                )}
               </p>
             </div>
 
-            <motion.div
-              className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                  {t('about.name', 'Gilson Mendes')}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {t('about.role', 'Coach Sportif')}
-                </div>
+            <dl className="grid grid-cols-3 gap-3 mt-8">
+              <div className="card p-4 text-center">
+                <dt className="text-xs text-muted uppercase tracking-wide">{t('about.role', 'Coach')}</dt>
+                <dd className="font-display text-xl text-accent m-0 mt-1">{t('about.name', 'Gilson Mendes')}</dd>
               </div>
-              <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                  {t('about.location', 'Côte d\'Azur')}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {t('about.location_full', 'Côte d\'Azur & Alentours')}
-                </div>
+              <div className="card p-4 text-center">
+                <dt className="text-xs text-muted uppercase tracking-wide">{t('about.location', 'Zone')}</dt>
+                <dd className="font-display text-xl text-accent m-0 mt-1">{t('about.location_short', "Côte d'Azur")}</dd>
               </div>
-              <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                  {t('about.availability', '7j/7')}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {t('about.hours', 'Sur RDV')}
-                </div>
+              <div className="card p-4 text-center">
+                <dt className="text-xs text-muted uppercase tracking-wide">{t('about.hours', 'Disponibilité')}</dt>
+                <dd className="font-display text-xl text-accent m-0 mt-1">{t('about.availability', '7j/7')}</dd>
               </div>
-            </motion.div>
+            </dl>
 
-            <motion.a
-              href="#contact"
-              className="btn-primary inline-block mt-8"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              {t('about.cta', 'Commençons Ensemble')}
-            </motion.a>
-          </motion.div>
+            <a href="#contact" className="btn btn-primary inline-flex mt-8">
+              {t('about.cta', 'Commençons ensemble')}
+            </a>
+          </div>
 
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="grid gap-6">
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="text-4xl">{achievement.icon}</div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        {t(achievement.titleKey)}
-                      </h3>
-                      <ul className="space-y-2">
-                        {achievement.itemsKeys.map((itemKey, idx) => (
-                          <li key={idx} className="flex items-center text-gray-600 dark:text-gray-300">
-                            <span className="text-green-500 dark:text-green-400 mr-2">✓</span>
-                            <span className="text-sm">{t(itemKey)}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+          <div className="space-y-6">
+            <figure className="reveal overflow-hidden rounded-xl border border-[var(--color-border)] shadow-card">
+              <img
+                src={COACH_PORTRAIT}
+                alt="Gilson Mendes, coach sportif professionnel sur la Côte d'Azur"
+                width={1280}
+                height={720}
+                loading="lazy"
+                className="w-full aspect-video object-cover"
+              />
+              <figcaption className="sr-only">Gilson Mendes — présentation vidéo</figcaption>
+            </figure>
+
+            {achievements.map((achievement, index) => (
+              <article
+                key={achievement.titleKey}
+                className={`card p-6 reveal${index === 1 ? ' reveal-delay-1' : index === 2 ? ' reveal-delay-2' : ''}`}
+              >
+                <div className="flex gap-4">
+                  <span className="text-3xl shrink-0" aria-hidden="true">{achievement.icon}</span>
+                  <div>
+                    <h3 className="font-display text-xl tracking-wide mb-3 m-0">
+                      {t(achievement.titleKey)}
+                    </h3>
+                    <ul className="space-y-2 list-none p-0 m-0">
+                      {achievement.itemsKeys.map((itemKey) => (
+                        <li key={itemKey} className="flex gap-2 text-sm text-muted">
+                          <span className="text-accent" aria-hidden="true">✓</span>
+                          {t(itemKey)}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

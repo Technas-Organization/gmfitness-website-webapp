@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { motion } from 'framer-motion';
 import { useI18n } from '@/hooks/useI18n';
 
 /**
@@ -204,73 +203,63 @@ const TestimonialsSection = memo(({
 
   const featuredTestimonials = testimonials.filter(t => t.featured);
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`text-lg ${i < rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
-      >
-        ⭐
+  const renderStars = (rating) =>
+    Array.from({ length: 5 }, (_, i) => (
+      <span key={i} className={i < rating ? 'text-amber-400' : 'text-[var(--color-border)]'} aria-hidden="true">
+        ★
       </span>
     ));
+
+  const ClientAvatar = ({ client }) => {
+    const isUrl = typeof client.photo === 'string' && client.photo.startsWith('http');
+    const initials = client.initials || client.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
+
+    if (isUrl) {
+      return (
+        <img
+          src={client.photo}
+          alt={`Photo de ${client.name}`}
+          width={48}
+          height={48}
+          loading="lazy"
+          className="w-12 h-12 rounded-full object-cover border-2 border-[var(--color-border)]"
+        />
+      );
+    }
+
+    return (
+      <div
+        className="w-12 h-12 rounded-full bg-[var(--color-accent-muted)] border-2 border-[var(--color-border)] flex items-center justify-center font-semibold text-accent text-sm"
+        aria-hidden="true"
+      >
+        {initials}
+      </div>
+    );
   };
 
   const TestimonialCard = ({ testimonial, variant = 'default' }) => (
-    <motion.div
-      className={`rounded-xl p-6 transition-all duration-300 ${
-        variant === 'featured' 
-          ? 'bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border-2 border-primary-200 dark:border-primary-700 shadow-lg' 
-          : 'bg-white dark:bg-gray-800 shadow-md hover:shadow-lg'
-      }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -5 }}
+    <article
+      className={`card p-6 ${variant === 'featured' ? 'card-featured' : ''}`}
     >
-      {/* Header avec photo et infos client */}
-      <div className="flex items-start space-x-4 mb-4">
-        <div className="flex-shrink-0">
-          <img
-            src={testimonial.client.photo}
-            alt={testimonial.client.name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'flex';
-            }}
-          />
-          <div className="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-800 items-center justify-center border-2 border-gray-200 dark:border-gray-600 hidden">
-            <span className="text-primary-600 dark:text-primary-400 font-semibold text-lg">
-              {testimonial.client.name.charAt(0).toUpperCase()}
-            </span>
-          </div>
-        </div>
-        
+      <div className="flex items-start gap-4 mb-4">
+        <ClientAvatar client={testimonial.client} />
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-gray-900 dark:text-white truncate">
-            {testimonial.client.name}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {testimonial.client.age} ans • {testimonial.client.location}
+          <h3 className="font-semibold text-[var(--color-text)] m-0">{testimonial.client.name}</h3>
+          <p className="text-sm text-muted m-0">
+            {testimonial.client.age ? `${testimonial.client.age} ans · ` : ''}
+            {testimonial.client.location}
           </p>
-          <div className="flex items-center mt-1">
+          <div className="flex mt-1" aria-label={`${testimonial.rating} étoiles sur 5`}>
             {renderStars(testimonial.rating)}
           </div>
         </div>
-
-        {variant === 'featured' && (
-          <div className="flex-shrink-0">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-800 text-primary-800 dark:text-primary-200">
-              ⭐ Coup de cœur
-            </span>
-          </div>
+        {variant === 'featured' && testimonial.verified && (
+          <span className="badge badge-primary shrink-0">Google</span>
         )}
       </div>
 
-      {/* Contenu du témoignage */}
-      <blockquote className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-        "{testimonial.content}"
+      <blockquote className="text-muted mb-4 leading-relaxed m-0">
+        &ldquo;{testimonial.content}&rdquo;
       </blockquote>
 
       {/* Tags */}
@@ -300,122 +289,65 @@ const TestimonialsSection = memo(({
         
         <time>{new Date(testimonial.date).toLocaleDateString()}</time>
       </div>
-    </motion.div>
+    </article>
   );
 
   return (
-    <section id="testimonials" className={`section-padding bg-gray-50 dark:bg-gray-800 ${className}`}>
+    <section id="testimonials" className={`section-padding section-muted ${className}`} aria-labelledby="testimonials-heading">
       <div className="container-max">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Témoignages <span className="text-primary-600 dark:text-primary-400">Clients</span>
+        <header className="section-header reveal">
+          <p className="section-eyebrow">Avis clients</p>
+          <h2 id="testimonials-heading" className="section-title">
+            Témoignages <span className="text-accent">clients</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-            Découvrez les transformations inspirantes de mes clients et leurs retours sur mon accompagnement.
+          <p className="section-subtitle">
+            Retours authentiques Google et transformations réelles sur la Côte d&apos;Azur.
           </p>
+        </header>
 
-          {/* Statistiques */}
-          {showStats && (
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">200+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Clients satisfaits</div>
+        {showStats && (
+          <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 card p-8 mb-12 reveal">
+            {[
+              ['200+', 'Clients satisfaits'],
+              ['4.9', 'Note moyenne'],
+              ['85%', 'Objectifs atteints'],
+              ['8+', "Années d'expérience"],
+            ].map(([value, label]) => (
+              <div key={label} className="text-center">
+                <dt className="text-sm text-muted">{label}</dt>
+                <dd className="font-display text-3xl text-accent m-0 mt-1">{value}</dd>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">4.9</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Note moyenne</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">85%</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Objectifs atteints</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">8+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Années d'expérience</div>
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Témoignages en vedette */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            ⭐ Témoignages en vedette
-          </h3>
-          <div className="grid lg:grid-cols-2 gap-8">
-            {featuredTestimonials.map((testimonial) => (
-              <TestimonialCard 
-                key={testimonial.id} 
-                testimonial={testimonial} 
-                variant="featured" 
-              />
             ))}
-          </div>
-        </motion.div>
+          </dl>
+        )}
 
-        {/* Tous les témoignages */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            📝 Tous les témoignages
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.slice(0, maxTestimonials).map((testimonial) => (
-              <TestimonialCard 
-                key={testimonial.id} 
-                testimonial={testimonial} 
-                variant="default" 
-              />
-            ))}
-          </div>
-        </motion.div>
+        <h3 className="font-display text-2xl tracking-wide text-center mb-8 reveal">Avis Google vérifiés</h3>
+        <div className="grid lg:grid-cols-2 gap-6 mb-12">
+          {featuredTestimonials.map((testimonial, i) => (
+            <div key={testimonial.id} className={`reveal${i % 2 ? ' reveal-delay-1' : ''}`}>
+              <TestimonialCard testimonial={testimonial} variant="featured" />
+            </div>
+          ))}
+        </div>
 
-        {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-primary-600 dark:bg-primary-500 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Prêt à commencer votre transformation ?</h3>
-            <p className="text-lg mb-6 opacity-90">
-              Rejoignez plus de 200 clients satisfaits et atteignez vos objectifs de forme !
-            </p>
-            <motion.a
-              href="#contact"
-              className="inline-flex items-center px-8 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Réserver ma séance gratuite
-            </motion.a>
-          </div>
-        </motion.div>
+        <h3 className="font-display text-2xl tracking-wide text-center mb-8 reveal">Plus de retours</h3>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.slice(0, maxTestimonials).map((testimonial, i) => (
+            <div key={testimonial.id} className={`reveal${i % 3 === 1 ? ' reveal-delay-1' : i % 3 === 2 ? ' reveal-delay-2' : ''}`}>
+              <TestimonialCard testimonial={testimonial} variant="default" />
+            </div>
+          ))}
+        </div>
+
+        <aside className="section-dark rounded-xl p-8 mt-12 text-center reveal">
+          <h3 className="font-display text-2xl tracking-wide mb-3">Prêt à commencer votre transformation ?</h3>
+          <p className="text-white/80 mb-6 max-w-xl mx-auto">
+            Rejoignez plus de 200 clients satisfaits et atteignez vos objectifs de forme.
+          </p>
+          <a href="#booking" className="btn btn-primary">
+            Réserver ma séance gratuite
+          </a>
+        </aside>
       </div>
     </section>
   );

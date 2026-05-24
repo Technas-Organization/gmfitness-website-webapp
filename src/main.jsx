@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import './i18n' // Initialise i18next
-import { ThemeProvider } from '@/components/common/ThemeProvider'
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+import './i18n';
+import { ThemeProvider } from '@/components/common/ThemeProvider';
+import { initScrollReveal } from '@/utils/scrollReveal';
 
-// Error handling pour les erreurs non catchées
 window.addEventListener('error', (event) => {
   console.error('Global error caught:', event.error);
 });
@@ -14,16 +14,27 @@ window.addEventListener('unhandledrejection', (event) => {
   console.error('Unhandled promise rejection:', event.reason);
 });
 
-// Meta theme-color pour les navigateurs mobiles
-const metaThemeColor = document.createElement('meta');
-metaThemeColor.name = 'theme-color';
-metaThemeColor.content = '#ffffff';
-document.head.appendChild(metaThemeColor);
+const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+if (!metaThemeColor) {
+  const el = document.createElement('meta');
+  el.name = 'theme-color';
+  el.content = '#f7f7f5';
+  document.head.appendChild(el);
+}
+
+function ScrollRevealInit() {
+  useEffect(() => {
+    const disconnect = initScrollReveal();
+    return () => disconnect?.();
+  }, []);
+  return null;
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
+      <ScrollRevealInit />
       <App />
     </ThemeProvider>
   </React.StrictMode>,
-)
+);

@@ -4,6 +4,8 @@
     "services": "Services",
     "about": "À propos",
     "testimonials": "Témoignages",
+    "programmes": "Programmes",
+    "pricing": "Tarifs",
     "contact": "Contact",
     "book": "Réserver"
   },
@@ -12,8 +14,8 @@
     "titleHighlight": "Bien-être",
     "subtitle": "Coach sportif diplômé sur la Côte d'Azur. Ancien sportif de haut niveau, je vous accompagne avec une approche holistique alliant corps et esprit pour votre transformation.",
     "cta": {
-      "primary": "Commencer Maintenant",
-      "secondary": "Découvrir les Services"
+      "primary": "Réserver une séance",
+      "secondary": "Voir le programme"
     },
     "stats": {
       "clients": "Clients Transformés",

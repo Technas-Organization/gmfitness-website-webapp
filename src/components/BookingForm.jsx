@@ -8,28 +8,20 @@ import { motion } from 'framer-motion';
 export default function BookingForm() {
   return (
     <section
-      id="booking"
-      className="min-h-screen bg-gradient-to-br from-azure-50 via-ocean-50 to-mediterranean-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-4 px-4"
+      id="tarifs"
+      className="section-padding section-surface scroll-mt-[var(--header-height)]"
+      aria-labelledby="tarifs-heading"
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Réservez votre
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-azure-600 to-ocean-600 ml-3">
-              Séance
-            </span>
+      <div className="container-max" id="booking">
+        <header className="section-header reveal">
+          <p className="section-eyebrow">Tarifs & réservation</p>
+          <h2 id="tarifs-heading" className="section-title">
+            Réservez votre <span className="text-accent">séance</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Choisissez votre créneau et type de séance. Première séance découverte gratuite !
+          <p className="section-subtitle">
+            Choisissez votre créneau et votre formule. Première séance découverte gratuite.
           </p>
-        </motion.div>
+        </header>
 
         {/* Services Cards */}
         <motion.div

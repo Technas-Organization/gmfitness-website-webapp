@@ -1,116 +1,107 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { useI18n } from '@/hooks/useI18n';
 import { SettingsPanel, CompactSettings } from './common/SettingsPanel';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useI18n();
 
   const navItems = [
-    { href: "#accueil", label: t('nav.home') },
-    { href: "#services", label: t('nav.services') },
-    { href: "#about", label: t('nav.about') },
-    { href: "#testimonials", label: t('nav.testimonials', 'Témoignages') },
-    { href: "#booking", label: t('nav.booking', 'Réservations') },
-    { href: "#contact", label: t('nav.contact') },
+    { href: '#accueil', label: t('nav.home') },
+    { href: '#services', label: t('nav.services') },
+    { href: '#programmes', label: t('nav.programmes', 'Programmes') },
+    { href: '#testimonials', label: t('nav.testimonials', 'Témoignages') },
+    { href: '#tarifs', label: t('nav.pricing', 'Tarifs') },
+    { href: '#about', label: t('nav.about') },
+    { href: '#contact', label: t('nav.contact') },
   ];
 
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   return (
-    <motion.header
-      className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-azure-900/90 backdrop-blur-md shadow-lg border-b border-azure-200/50 dark:border-azure-700/50"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <nav className="container-max flex items-center justify-between py-6 px-6">
-        <motion.div
-          className="text-2xl font-bold text-primary-600 dark:text-primary-400"
-          whileHover={{ scale: 1.05 }}
-        >
-          GML FITNESS
-        </motion.div>
+    <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`} role="banner">
+      <nav className="container-max flex h-full items-center justify-between" aria-label="Navigation principale">
+        <a href="#accueil" className="font-display text-2xl tracking-widest text-[var(--color-text)]">
+          GML <span className="text-accent">FITNESS</span>
+        </a>
 
-        {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8 px-2">
+        <ul className="hidden lg:flex items-center gap-8 list-none m-0 p-0">
           {navItems.map((item) => (
-            <motion.a
-              key={item.href}
-              href={item.href}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
-              whileHover={{ y: -2 }}
-            >
-              {item.label}
-            </motion.a>
+            <li key={item.href}>
+              <a href={item.href} className="site-nav-link">
+                {item.label}
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <div className="hidden md:flex items-center space-x-4 px-2">
-          <motion.a
-            href="#contact"
-            className="btn-primary"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+        <div className="hidden lg:flex items-center gap-3">
+          <a href="#booking" className="btn btn-primary">
             {t('nav.book')}
-          </motion.a>
-          
+          </a>
           <SettingsPanel />
         </div>
 
-        {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2"
+          type="button"
+          className="lg:hidden p-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
         >
-          <div className="w-6 h-6 flex flex-col justify-around">
-            <span className={`h-0.5 bg-gray-700 dark:bg-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`h-0.5 bg-gray-700 dark:bg-white transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`h-0.5 bg-gray-700 dark:bg-white transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          <span className="sr-only">{isMenuOpen ? 'Fermer' : 'Menu'}</span>
+          <div className="w-6 h-5 flex flex-col justify-between" aria-hidden="true">
+            <span className={`block h-0.5 bg-[var(--color-text)] transition-transform ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block h-0.5 bg-[var(--color-text)] transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`} />
+            <span className={`block h-0.5 bg-[var(--color-text)] transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </div>
         </button>
+      </nav>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <motion.div
-            className="absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700 md:hidden"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <div className="flex flex-col space-y-4 p-6">
-              {navItems.map((item) => (
+      {isMenuOpen && (
+        <div
+          id="mobile-menu"
+          className="lg:hidden absolute top-[var(--header-height)] inset-x-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-lg animate-fade-in"
+        >
+          <ul className="flex flex-col gap-1 p-4 list-none m-0">
+            {navItems.map((item) => (
+              <li key={item.href}>
                 <a
-                  key={item.href}
                   href={item.href}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                  className="block py-3 px-2 font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </a>
-              ))}
-              
-              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-4">
-                <a 
-                  href="#contact" 
-                  className="btn-primary text-center block" 
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t('nav.book')}
-                </a>
-                
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                    {t('common.settings', 'Paramètres')}
-                  </span>
-                  <CompactSettings />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </nav>
-    </motion.header>
+              </li>
+            ))}
+            <li className="pt-4 mt-2 border-t border-[var(--color-border)]">
+              <a href="#booking" className="btn btn-primary w-full" onClick={() => setIsMenuOpen(false)}>
+                {t('nav.book')}
+              </a>
+            </li>
+            <li className="flex items-center justify-between pt-4">
+              <span className="text-sm text-muted">{t('common.settings', 'Paramètres')}</span>
+              <CompactSettings />
+            </li>
+          </ul>
+        </div>
+      )}
+    </header>
   );
 };
 
