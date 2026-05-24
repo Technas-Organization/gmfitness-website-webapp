@@ -44,11 +44,11 @@ export default function VideoSection() {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   return (
-    <section id="programmes" className="section-padding section-surface" aria-labelledby="programmes-heading">
+    <section id="videos" className="section-padding section-muted scroll-mt-[var(--header-height)]" aria-labelledby="videos-heading">
       <div className="container-max">
         <header className="section-header reveal">
-          <p className="section-eyebrow">Programmes</p>
-          <h2 id="programmes-heading" className="section-title">
+          <p className="section-eyebrow">Vidéos</p>
+          <h2 id="videos-heading" className="section-title">
             Découvrez mon <span className="text-accent">approche</span>
           </h2>
           <p className="section-subtitle">
