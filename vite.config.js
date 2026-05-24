@@ -19,7 +19,7 @@ export default defineConfig({
           // Sépare Framer Motion dans un chunk séparé
           'framer-motion': ['framer-motion'],
           // Sépare React dans un chunk séparé
-          'react-vendor': ['react', 'react-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
         },
       },
     },

@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams, Link } from 'react-router-dom';
+import { programmes, getProgrammeById } from '@/data/programmes';
+import ProgrammeBookingForm from '@/components/booking/ProgrammeBookingForm';
+import BookingConfirmation from '@/components/booking/BookingConfirmation';
 
 /**
- * Composant de réservation avec intégration Fillout
- * Pattern: Iframe Embed + Modern UI
+ * Composant de réservation avec intégration Fillout + EmailJS
  */
 export default function BookingForm() {
+  const [searchParams] = useSearchParams();
+  const initialProgrammeId = searchParams.get('programme') || '';
+  const [selectedProgrammeId, setSelectedProgrammeId] = useState(initialProgrammeId);
+  const [bookingSuccess, setBookingSuccess] = useState(null);
+
+  const selectedProgramme = getProgrammeById(selectedProgrammeId) || null;
+  const confirmedProgramme =
+    bookingSuccess?.programme || getProgrammeById(bookingSuccess?.programmeId) || selectedProgramme;
+
   return (
     <section
       id="tarifs"
@@ -22,6 +34,52 @@ export default function BookingForm() {
             Choisissez votre créneau et votre formule. Première séance découverte gratuite.
           </p>
         </header>
+
+        {bookingSuccess ? (
+          <BookingConfirmation programme={confirmedProgramme} bookingDetails={bookingSuccess} />
+        ) : (
+        <motion.div
+          className="card p-6 mb-8 reveal"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <label htmlFor="programme-select" className="block text-sm font-semibold mb-2">
+            Programme (optionnel)
+          </label>
+          <select
+            id="programme-select"
+            value={selectedProgrammeId}
+            onChange={(e) => setSelectedProgrammeId(e.target.value)}
+            className="w-full max-w-md px-4 py-3 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-text)] mb-6"
+          >
+            <option value="">Séance / forfait classique</option>
+            {programmes.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.title}
+              </option>
+            ))}
+          </select>
+          {selectedProgramme && (
+            <p className="text-sm text-muted mb-4">
+              {selectedProgramme.subtitle}{' '}
+              <Link to={`/programmes/${selectedProgramme.id}`} className="text-accent font-medium">
+                Voir le détail →
+              </Link>
+            </p>
+          )}
+          <ProgrammeBookingForm
+            programme={selectedProgramme}
+            onSuccess={(details) =>
+              setBookingSuccess({
+                ...details,
+                programme: details.programme || selectedProgramme,
+                programmeId: selectedProgrammeId,
+              })
+            }
+          />
+        </motion.div>
+        )}
 
         {/* Services Cards */}
         <motion.div

@@ -1,11 +1,34 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/hooks/useI18n';
 import { SettingsPanel, CompactSettings } from './common/SettingsPanel';
+
+function NavLink({ href, children, onNavigate, className = 'site-nav-link' }) {
+  const location = useLocation();
+  const isHash = href.startsWith('#');
+  const to = isHash ? `/${href}` : href;
+
+  const handleClick = () => {
+    onNavigate?.();
+    if (isHash && location.pathname === '/') {
+      requestAnimationFrame(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+  };
+
+  return (
+    <Link to={to} className={className} onClick={handleClick}>
+      {children}
+    </Link>
+  );
+}
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useI18n();
+  const closeMenu = () => setIsMenuOpen(false);
 
   const navItems = [
     { href: '#accueil', label: t('nav.home') },
@@ -34,24 +57,24 @@ const Header = () => {
   return (
     <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`} role="banner">
       <nav className="container-max flex h-full items-center justify-between" aria-label="Navigation principale">
-        <a href="#accueil" className="font-display text-2xl tracking-widest text-[var(--color-text)]">
+        <Link to="/#accueil" className="font-display text-2xl tracking-widest text-[var(--color-text)]">
           GML <span className="text-accent">FITNESS</span>
-        </a>
+        </Link>
 
         <ul className="hidden lg:flex items-center gap-8 list-none m-0 p-0">
           {navItems.map((item) => (
             <li key={item.href}>
-              <a href={item.href} className="site-nav-link">
+              <NavLink href={item.href} onNavigate={closeMenu}>
                 {item.label}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a href="#booking" className="btn btn-primary">
+          <Link to="/#booking" className="btn btn-primary">
             {t('nav.book')}
-          </a>
+          </Link>
           <SettingsPanel />
         </div>
 
@@ -80,19 +103,19 @@ const Header = () => {
           <ul className="flex flex-col gap-1 p-4 list-none m-0">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a
+                <NavLink
                   href={item.href}
+                  onNavigate={closeMenu}
                   className="block py-3 px-2 font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </NavLink>
               </li>
             ))}
             <li className="pt-4 mt-2 border-t border-[var(--color-border)]">
-              <a href="#booking" className="btn btn-primary w-full" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/#booking" className="btn btn-primary w-full" onClick={closeMenu}>
                 {t('nav.book')}
-              </a>
+              </Link>
             </li>
             <li className="flex items-center justify-between pt-4">
               <span className="text-sm text-muted">{t('common.settings', 'Paramètres')}</span>
