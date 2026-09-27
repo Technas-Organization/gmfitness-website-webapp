@@ -8,13 +8,13 @@ const Header = () => {
   const { t } = useI18n();
 
   const navItems = [
-    { href: '#accueil', label: t('nav.home') },
     { href: '#services', label: t('nav.services') },
-    { href: '#programmes', label: t('nav.programmes', 'Programmes') },
-    { href: '#testimonials', label: t('nav.testimonials', 'Témoignages') },
     { href: '#tarifs', label: t('nav.pricing', 'Tarifs') },
+    { href: '#avance-immediate', label: t('nav.avance', 'Avance immédiate') },
     { href: '#about', label: t('nav.about') },
+    { href: '#programmes', label: t('nav.programmes', 'Programmes') },
     { href: '#contact', label: t('nav.contact') },
+    { href: '#testimonials', label: t('nav.testimonials', 'Avis') },
   ];
 
   useEffect(() => {
@@ -34,11 +34,16 @@ const Header = () => {
   return (
     <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`} role="banner">
       <nav className="container-max flex h-full items-center justify-between" aria-label="Navigation principale">
-        <a href="#accueil" className="font-display text-2xl tracking-widest text-[var(--color-text)]">
-          GML <span className="text-accent">FITNESS</span>
+        <a href="#accueil" className="brand" aria-label="GML — Le bien-être par le mouvement, retour à l'accueil">
+          <span className="brand__name">GML</span>
+          <span className="brand__tagline">
+            Le bien-être
+            <br />
+            par le mouvement
+          </span>
         </a>
 
-        <ul className="hidden lg:flex items-center gap-8 list-none m-0 p-0">
+        <ul className="hidden xl:flex items-center gap-6 list-none m-0 p-0">
           {navItems.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="site-nav-link">
@@ -48,7 +53,7 @@ const Header = () => {
           ))}
         </ul>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <a href="#booking" className="btn btn-primary">
             {t('nav.book')}
           </a>
@@ -57,7 +62,7 @@ const Header = () => {
 
         <button
           type="button"
-          className="lg:hidden p-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
+          className="xl:hidden p-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
@@ -75,7 +80,7 @@ const Header = () => {
       {isMenuOpen && (
         <div
           id="mobile-menu"
-          className="lg:hidden absolute top-[var(--header-height)] inset-x-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-lg animate-fade-in"
+          className="xl:hidden absolute top-[var(--header-height)] inset-x-0 border-t border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-lg animate-fade-in"
         >
           <ul className="flex flex-col gap-1 p-4 list-none m-0">
             {navItems.map((item) => (

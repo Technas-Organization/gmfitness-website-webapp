@@ -114,10 +114,11 @@ const Contact = () => {
   };
 
   const services = [
-    'Coaching Individuel',
-    'Coaching Collectif',
-    'Programmes en Ligne', 
-    'Interventions Entreprises'
+    'Remise en forme',
+    'Pilates',
+    'Yoga',
+    'Renforcement musculaire',
+    'Rééquilibrage alimentaire'
   ];
 
   const commonObjectives = [
@@ -166,7 +167,7 @@ const Contact = () => {
       content: [
         "Côte d'Azur",
         "Déplacements possibles",
-        "À domicile ou en extérieur"
+        "Cours individuels à domicile"
       ]
     },
     {

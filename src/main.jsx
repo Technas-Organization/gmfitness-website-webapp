@@ -18,7 +18,7 @@ const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 if (!metaThemeColor) {
   const el = document.createElement('meta');
   el.name = 'theme-color';
-  el.content = '#f7f7f5';
+  el.content = '#fbf5ef';
   document.head.appendChild(el);
 }
 

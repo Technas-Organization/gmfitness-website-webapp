@@ -1,7 +1,12 @@
 import { useI18n } from '@/hooks/useI18n';
 
-const COACH_PORTRAIT =
-  'https://img.youtube.com/vi/NdcT_AjbnGM/maxresdefault.jpg';
+const IMG = `${import.meta.env.BASE_URL}images/`;
+const COACH_PORTRAIT = `${IMG}coach-sourire.jpg`;
+
+const GALLERY = [
+  { src: `${IMG}yoga-arbre.jpg`, alt: "Séance de yoga en extérieur, posture de l'arbre" },
+  { src: `${IMG}yoga-chien.jpg`, alt: 'Séance de yoga en extérieur, posture du chien tête en bas' },
+];
 
 const About = () => {
   const { t } = useI18n();
@@ -99,13 +104,13 @@ const About = () => {
             <figure className="reveal overflow-hidden rounded-xl border border-[var(--color-border)] shadow-card">
               <img
                 src={COACH_PORTRAIT}
-                alt="Gilson Mendes, coach sportif professionnel sur la Côte d'Azur"
-                width={1280}
-                height={720}
+                alt="Gilson Mendes, coach sportif et bien-être, souriant en salle de sport"
+                width={1500}
+                height={2000}
                 loading="lazy"
-                className="w-full aspect-video object-cover"
+                className="w-full aspect-[4/3] object-cover object-[center_25%]"
               />
-              <figcaption className="sr-only">Gilson Mendes — présentation vidéo</figcaption>
+              <figcaption className="sr-only">Gilson Mendes — coach sportif & bien-être</figcaption>
             </figure>
 
             {achievements.map((achievement, index) => (
@@ -133,6 +138,14 @@ const About = () => {
             ))}
           </div>
         </div>
+
+        <ul className="about-gallery list-none p-0 m-0 mt-12" aria-label="Séances de yoga individuelles">
+          {GALLERY.map((photo, index) => (
+            <li key={photo.src} className={`reveal${index ? ` reveal-delay-${index}` : ''}`}>
+              <img src={photo.src} alt={photo.alt} width={533} height={800} loading="lazy" />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useI18n } from '@/hooks/useI18n';
 
 /**
  * Section simplifiée des témoignages
@@ -9,7 +8,6 @@ const TestimonialsSection = memo(({
   showStats = true,
   maxTestimonials = 12
 }) => {
-  const { t } = useI18n();
 
   // Données de témoignages avec avis Google authentiques
   const testimonials = [
@@ -149,59 +147,8 @@ const TestimonialsSection = memo(({
       source: 'google',
       tags: ['transformation', '6 mois', 'écoute', 'conseille'],
       featured: true
-    },
-    // TÉMOIGNAGES DÉTAILLÉS  
-    {
-      id: 10,
-      client: {
-        name: 'Sarah Martin',
-        age: 28,
-        location: 'Paris',
-        photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b5c8?w=100&h=100&fit=crop&crop=face'
-      },
-      rating: 5,
-      content: 'Guillaume a transformé ma vie ! En 3 mois, j\'ai perdu 12kg et retrouvé ma confiance en moi. Son approche personnalisée et ses conseils nutrition ont fait toute la différence.',
-      program: 'Perte de poids',
-      duration: '3 mois',
-      date: '2024-01-15',
-      tags: ['perte de poids', 'nutrition', 'confiance'],
-      featured: false
-    },
-    {
-      id: 5,
-      client: {
-        name: 'Thomas Dubois',
-        age: 35,
-        location: 'Lyon',
-        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'
-      },
-      rating: 5,
-      content: 'Après une blessure au dos, Guillaume m\'a accompagné dans ma rééducation. Aujourd\'hui je suis plus fort qu\'avant ! Un vrai professionnel.',
-      program: 'Rééducation',
-      duration: '6 mois', 
-      date: '2024-02-20',
-      tags: ['rééducation', 'blessure', 'force'],
-      featured: false
-    },
-    {
-      id: 6,
-      client: {
-        name: 'Marie Leroy',
-        age: 42,
-        location: 'Mouans-Sartoux',
-        photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'
-      },
-      rating: 5,
-      content: 'Grâce au programme de Guillaume, j\'ai terminé mon premier marathon ! Un rêve devenu réalité grâce à ses conseils experts.',
-      program: 'Préparation marathon',
-      duration: '4 mois',
-      date: '2024-03-10',
-      tags: ['marathon', 'endurance', 'objectif'],
-      featured: false
     }
   ];
-
-  const featuredTestimonials = testimonials.filter(t => t.featured);
 
   const renderStars = (rating) =>
     Array.from({ length: 5 }, (_, i) => (
@@ -210,144 +157,44 @@ const TestimonialsSection = memo(({
       </span>
     ));
 
-  const ClientAvatar = ({ client }) => {
-    const isUrl = typeof client.photo === 'string' && client.photo.startsWith('http');
-    const initials = client.initials || client.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
-
-    if (isUrl) {
-      return (
-        <img
-          src={client.photo}
-          alt={`Photo de ${client.name}`}
-          width={48}
-          height={48}
-          loading="lazy"
-          className="w-12 h-12 rounded-full object-cover border-2 border-[var(--color-border)]"
-        />
-      );
-    }
-
-    return (
-      <div
-        className="w-12 h-12 rounded-full bg-[var(--color-accent-muted)] border-2 border-[var(--color-border)] flex items-center justify-center font-semibold text-accent text-sm"
-        aria-hidden="true"
-      >
-        {initials}
-      </div>
-    );
-  };
-
-  const TestimonialCard = ({ testimonial, variant = 'default' }) => (
-    <article
-      className={`card p-6 ${variant === 'featured' ? 'card-featured' : ''}`}
-    >
-      <div className="flex items-start gap-4 mb-4">
-        <ClientAvatar client={testimonial.client} />
-        <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-[var(--color-text)] m-0">{testimonial.client.name}</h3>
-          <p className="text-sm text-muted m-0">
-            {testimonial.client.age ? `${testimonial.client.age} ans · ` : ''}
-            {testimonial.client.location}
-          </p>
-          <div className="flex mt-1" aria-label={`${testimonial.rating} étoiles sur 5`}>
-            {renderStars(testimonial.rating)}
-          </div>
-        </div>
-        {variant === 'featured' && testimonial.verified && (
-          <span className="badge badge-primary shrink-0">Google</span>
-        )}
-      </div>
-
-      <blockquote className="text-muted mb-4 leading-relaxed m-0">
-        &ldquo;{testimonial.content}&rdquo;
-      </blockquote>
-
-      {/* Tags */}
-      {testimonial.tags && testimonial.tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-4">
-          {testimonial.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Footer avec date et programme */}
-      <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-600 pt-4">
-        <div className="flex items-center space-x-4">
-          <span className="flex items-center">
-            🏋️‍♀️ {testimonial.program}
-          </span>
-          <span className="flex items-center">
-            ⏱️ {testimonial.duration}
-          </span>
-        </div>
-        
-        <time>{new Date(testimonial.date).toLocaleDateString()}</time>
-      </div>
-    </article>
-  );
+  const reviews = testimonials.slice(0, maxTestimonials);
 
   return (
-    <section id="testimonials" className={`section-padding section-muted ${className}`} aria-labelledby="testimonials-heading">
+    <section id="testimonials" className={`section-padding-sm section-muted ${className}`} aria-labelledby="testimonials-heading">
       <div className="container-max">
-        <header className="section-header reveal">
-          <p className="section-eyebrow">Avis clients</p>
-          <h2 id="testimonials-heading" className="section-title">
-            Témoignages <span className="text-accent">clients</span>
-          </h2>
-          <p className="section-subtitle">
-            Retours authentiques Google et transformations réelles sur la Côte d&apos;Azur.
-          </p>
+        <header className="reviews-header reveal">
+          <div>
+            <p className="section-eyebrow">Avis clients</p>
+            <h2 id="testimonials-heading" className="reviews-header__title">
+              Ils m&apos;ont fait <span className="text-accent">confiance</span>
+            </h2>
+          </div>
+          {showStats && (
+            <p className="reviews-header__score">
+              <span className="text-amber-400" aria-hidden="true">★★★★★</span>{' '}
+              <strong>5/5</strong> · {testimonials.length} avis Google
+            </p>
+          )}
         </header>
 
-        {showStats && (
-          <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 card p-8 mb-12 reveal">
-            {[
-              ['200+', 'Clients satisfaits'],
-              ['4.9', 'Note moyenne'],
-              ['85%', 'Objectifs atteints'],
-              ['8+', "Années d'expérience"],
-            ].map(([value, label]) => (
-              <div key={label} className="text-center">
-                <dt className="text-sm text-muted">{label}</dt>
-                <dd className="font-display text-3xl text-accent m-0 mt-1">{value}</dd>
+        <ul className="reviews-strip list-none m-0 p-0" aria-label="Avis Google">
+          {reviews.map((review) => (
+            <li key={review.id} className="reviews-strip__item card">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="reviews-strip__avatar" aria-hidden="true">{review.client.initials}</span>
+                <div>
+                  <p className="font-semibold text-[var(--color-text)] m-0 text-sm">{review.client.name}</p>
+                  <p className="m-0 text-xs" aria-label={`${review.rating} étoiles sur 5`}>
+                    {renderStars(review.rating)}
+                  </p>
+                </div>
               </div>
-            ))}
-          </dl>
-        )}
-
-        <h3 className="font-display text-2xl tracking-wide text-center mb-8 reveal">Avis Google vérifiés</h3>
-        <div className="grid lg:grid-cols-2 gap-6 mb-12">
-          {featuredTestimonials.map((testimonial, i) => (
-            <div key={testimonial.id} className={`reveal${i % 2 ? ' reveal-delay-1' : ''}`}>
-              <TestimonialCard testimonial={testimonial} variant="featured" />
-            </div>
+              <blockquote className="text-muted text-sm leading-relaxed m-0">
+                &ldquo;{review.content}&rdquo;
+              </blockquote>
+            </li>
           ))}
-        </div>
-
-        <h3 className="font-display text-2xl tracking-wide text-center mb-8 reveal">Plus de retours</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.slice(0, maxTestimonials).map((testimonial, i) => (
-            <div key={testimonial.id} className={`reveal${i % 3 === 1 ? ' reveal-delay-1' : i % 3 === 2 ? ' reveal-delay-2' : ''}`}>
-              <TestimonialCard testimonial={testimonial} variant="default" />
-            </div>
-          ))}
-        </div>
-
-        <aside className="section-dark rounded-xl p-8 mt-12 text-center reveal">
-          <h3 className="font-display text-2xl tracking-wide mb-3">Prêt à commencer votre transformation ?</h3>
-          <p className="text-white/80 mb-6 max-w-xl mx-auto">
-            Rejoignez plus de 200 clients satisfaits et atteignez vos objectifs de forme.
-          </p>
-          <a href="#booking" className="btn btn-primary">
-            Réserver ma séance gratuite
-          </a>
-        </aside>
+        </ul>
       </div>
     </section>
   );

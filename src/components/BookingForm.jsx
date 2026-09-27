@@ -1,10 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaWhatsapp } from 'react-icons/fa';
+import { LuPhone } from 'react-icons/lu';
 
 /**
- * Composant de réservation avec intégration Fillout
- * Pattern: Iframe Embed + Modern UI
+ * Tarifs (formules services à la personne) et réservation directe
  */
+const FORMULES = [
+  { sessions: 20, price: 30, featured: true },
+  { sessions: 15, price: 35 },
+  { sessions: 10, price: 40 },
+];
+
 export default function BookingForm() {
   return (
     <section
@@ -19,108 +26,76 @@ export default function BookingForm() {
             Réservez votre <span className="text-accent">séance</span>
           </h2>
           <p className="section-subtitle">
-            Choisissez votre créneau et votre formule. Première séance découverte gratuite.
+            Des cours individuels à domicile, éligibles aux services à la personne.
           </p>
         </header>
 
-        {/* Services Cards */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-3 mb-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {/* Coaching Individuel – Côte d'Azur */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300">
-            <div className="text-center">
-              <div className="text-4xl mb-4">🏋️‍♂️</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                Coaching Individuel
-              </h3>
-              <p className="text-sm text-azure-600 dark:text-azure-400 mb-4">Côte d'Azur</p>
-              <div className="text-left text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                <div className="flex justify-between"><span>Séance à l'unité</span><span className="font-semibold text-azure-600 dark:text-azure-400">120 €</span></div>
-                <div className="flex justify-between"><span>Pack Découverte – 5 séances</span><span className="font-semibold text-azure-600 dark:text-azure-400">550 €</span></div>
-                <div className="flex justify-between"><span>Pack Transformation – 10 séances</span><span className="font-semibold text-azure-600 dark:text-azure-400">1 000 €</span></div>
-                <div className="flex justify-between"><span>Accompagnement 3 mois – Premium</span><span className="font-semibold text-azure-600 dark:text-azure-400">2 100 €</span></div>
-                <div className="flex justify-between"><span>Accompagnement 6 mois – VIP</span><span className="font-semibold text-azure-600 dark:text-azure-400">3 600 €</span></div>
-              </div>
-            </div>
+        {/* Formules — Services à la personne */}
+        <div className="formules mb-10">
+          <h3 className="formules__title reveal">Mes formules</h3>
+          <div className="grid sm:grid-cols-3 gap-4 lg:gap-6">
+            {FORMULES.map((formule, index) => (
+              <article
+                key={formule.sessions}
+                className={`formule-card reveal${index ? ` reveal-delay-${index}` : ''}${formule.featured ? ' formule-card--featured' : ''}`}
+              >
+                <header className="formule-card__head">{formule.sessions} séances</header>
+                <p className="formule-card__price">
+                  {formule.price} €<span className="formule-card__unit">/ séance</span>
+                </p>
+                <p className="formule-card__total">
+                  Prix réel : {formule.price * 2} € / séance
+                  <br />
+                  Vous payez {(formule.sessions * formule.price).toLocaleString('fr-FR')} € au lieu de{' '}
+                  {(formule.sessions * formule.price * 2).toLocaleString('fr-FR')} €
+                </p>
+              </article>
+            ))}
           </div>
+          <p className="formules__note">
+            Tarifs affichés après crédit d&apos;impôt de 50 % (services à la personne), sous réserve des conditions d&apos;éligibilité.
+            Avec l&apos;<a href="#avance-immediate" className="link">Avance immédiate</a>, vous ne payez que ce montant, tout de suite.
+          </p>
 
-          {/* Coaching Collectif */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300">
-            <div className="text-center">
-              <div className="text-4xl mb-4">👥</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                Coaching Collectif
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Séance en groupe (max 5)
-              </p>
-              <div className="text-2xl font-bold text-ocean-600 dark:text-ocean-400">
-                25€
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                Par personne
-              </p>
-            </div>
-          </div>
-
-          {/* Séance Découverte */}
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-4 shadow-lg border-2 border-green-200 dark:border-green-700 hover:shadow-xl transition-all duration-300">
-            <div className="text-center">
-              <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                Séance Découverte
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Première séance d'évaluation
-              </p>
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                GRATUITE
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                Offre limitée
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Fillout Booking Form - Full Screen */}
-        <motion.div
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-gradient-to-r from-azure-500 to-ocean-500 p-4 text-white">
-            <h3 className="text-xl font-bold mb-1">
-              📅 Planifiez votre séance
-            </h3>
-            <p className="text-azure-100 text-sm">
-              Sélectionnez vos préférences et trouvez le créneau parfait
-            </p>
-          </div>
-          
-          {/* Fillout booking form - No padding for full width */}
-          <div className="relative">
-            <iframe
-              src="https://forms.fillout.com/t/c24LK1RZ97us"
-              className="w-full h-[1300px] border-0"
-              frameBorder="0"
-              title="Réservation de séance avec Gilson Mendes - Coach Sportif Côte d'Azur"
-              allowFullScreen
+          <aside className="sap-banner reveal" aria-label="Avantage fiscal services à la personne">
+            <img
+              src={`${import.meta.env.BASE_URL}images/logo-sap.jpg`}
+              alt="Logo Services à la personne"
+              width={1626}
+              height={1373}
               loading="lazy"
-              style={{ 
-                minHeight: '1300px',
-                overflow: 'hidden'
-              }}
+              className="sap-banner__logo"
             />
+            <p className="sap-banner__pct" aria-hidden="true">50%</p>
+            <p className="sap-banner__text">
+              Des prestations éligibles aux dispositifs de <strong>services à la personne</strong> avec un{' '}
+              <strong className="text-accent">avantage fiscal de 50 %</strong> sur vos dépenses, déduit immédiatement
+              grâce à l&apos;<a href="#avance-immediate" className="link">Avance immédiate</a>.
+            </p>
+          </aside>
+        </div>
+
+        {/* Réservation directe — WhatsApp ou téléphone */}
+        <aside className="booking-cta reveal" aria-labelledby="booking-cta-heading">
+          <h3 id="booking-cta-heading" className="booking-cta__title">Réservez votre séance à domicile</h3>
+          <p className="booking-cta__text">
+            Envoyez-moi un message ou appelez-moi : nous choisissons ensemble votre formule et vos créneaux,
+            et je me déplace chez vous.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-3">
+            <a
+              href="https://wa.me/33617043599?text=Bonjour Gilson, je souhaite réserver des séances de coaching à domicile."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-whatsapp"
+            >
+              <FaWhatsapp aria-hidden="true" /> Réserver sur WhatsApp
+            </a>
+            <a href="tel:+33617043599" className="btn btn-primary">
+              <LuPhone aria-hidden="true" /> Appeler le 06 17 04 35 99
+            </a>
           </div>
-        </motion.div>
+        </aside>
 
         {/* Questions fréquentes */}
         <motion.div
@@ -171,14 +146,14 @@ export default function BookingForm() {
                   📱 WhatsApp
                 </a>
                 <a
-                  href="mailto:gilson.mendes@gmail.com?subject=Demande de tarifs&body=Bonjour Gilson,%0D%0A%0D%0AJ'aimerais connaître vos tarifs pour les séances de coaching individuel.%0D%0A%0D%0AAvez-vous des forfaits avantageux ?%0D%0A%0D%0AMerci !%0D%0A"
+                  href="mailto:gilson.mendes-landim@hotmail.com?subject=Demande de tarifs&body=Bonjour Gilson,%0D%0A%0D%0AJ'aimerais connaître vos tarifs pour les séances de coaching individuel.%0D%0A%0D%0AAvez-vous des forfaits avantageux ?%0D%0A%0D%0AMerci !%0D%0A"
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   ✉️ Email
                 </a>
                 <a
                   href="tel:+33617043599"
-                  className="flex items-center px-3 py-2 bg-azure-500 hover:bg-azure-600 text-white rounded-lg text-xs font-medium transition-colors"
+                  className="flex items-center px-3 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   📞 Appeler
                 </a>
@@ -215,14 +190,14 @@ export default function BookingForm() {
                   📱 WhatsApp
                 </a>
                 <a
-                  href="mailto:gilson.mendes@gmail.com?subject=Demande de disponibilités&body=Bonjour Gilson,%0D%0A%0D%0AJ'aimerais connaître vos créneaux disponibles pour des séances de coaching.%0D%0A%0D%0AJe suis plutôt libre le matin/midi/soir.%0D%0A%0D%0AMerci !%0D%0A"
+                  href="mailto:gilson.mendes-landim@hotmail.com?subject=Demande de disponibilités&body=Bonjour Gilson,%0D%0A%0D%0AJ'aimerais connaître vos créneaux disponibles pour des séances de coaching.%0D%0A%0D%0AJe suis plutôt libre le matin/midi/soir.%0D%0A%0D%0AMerci !%0D%0A"
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   ✉️ Email
                 </a>
                 <a
                   href="tel:+33617043599"
-                  className="flex items-center px-3 py-2 bg-azure-500 hover:bg-azure-600 text-white rounded-lg text-xs font-medium transition-colors"
+                  className="flex items-center px-3 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   📞 Appeler
                 </a>
@@ -259,14 +234,14 @@ export default function BookingForm() {
                   📱 WhatsApp
                 </a>
                 <a
-                  href="mailto:gilson.mendes@gmail.com?subject=Séances à domicile&body=Bonjour Gilson,%0D%0A%0D%0AJe souhaiterais des séances de coaching à mon domicile.%0D%0A%0D%0AVous déplacez-vous dans ma zone ? Je suis à [votre ville].%0D%0A%0D%0AMerci !%0D%0A"
+                  href="mailto:gilson.mendes-landim@hotmail.com?subject=Séances à domicile&body=Bonjour Gilson,%0D%0A%0D%0AJe souhaiterais des séances de coaching à mon domicile.%0D%0A%0D%0AVous déplacez-vous dans ma zone ? Je suis à [votre ville].%0D%0A%0D%0AMerci !%0D%0A"
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   ✉️ Email
                 </a>
                 <a
                   href="tel:+33617043599"
-                  className="flex items-center px-3 py-2 bg-azure-500 hover:bg-azure-600 text-white rounded-lg text-xs font-medium transition-colors"
+                  className="flex items-center px-3 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   📞 Appeler
                 </a>
@@ -303,14 +278,14 @@ export default function BookingForm() {
                   📱 WhatsApp
                 </a>
                 <a
-                  href="mailto:gilson.mendes@gmail.com?subject=Demande de programme personnalisé&body=Bonjour Gilson,%0D%0A%0D%0AJe souhaiterais obtenir plus d'informations sur vos programmes personnalisés de coaching.%0D%0A%0D%0AMes objectifs : [perte de poids / prise de muscle / remise en forme / autre]%0D%0AMon niveau actuel : [débutant / intermédiaire / confirmé]%0D%0AMa disponibilité : [nombre de séances par semaine souhaitées]%0D%0A%0D%0APourriez-vous me proposer un programme adapté ?%0D%0A%0D%0AMerci !%0D%0A"
+                  href="mailto:gilson.mendes-landim@hotmail.com?subject=Demande de programme personnalisé&body=Bonjour Gilson,%0D%0A%0D%0AJe souhaiterais obtenir plus d'informations sur vos programmes personnalisés de coaching.%0D%0A%0D%0AMes objectifs : [perte de poids / prise de muscle / remise en forme / autre]%0D%0AMon niveau actuel : [débutant / intermédiaire / confirmé]%0D%0AMa disponibilité : [nombre de séances par semaine souhaitées]%0D%0A%0D%0APourriez-vous me proposer un programme adapté ?%0D%0A%0D%0AMerci !%0D%0A"
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   ✉️ Email
                 </a>
                 <a
                   href="tel:+33617043599"
-                  className="flex items-center px-3 py-2 bg-azure-500 hover:bg-azure-600 text-white rounded-lg text-xs font-medium transition-colors"
+                  className="flex items-center px-3 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   📞 Appeler
                 </a>
@@ -347,14 +322,14 @@ export default function BookingForm() {
                   📱 WhatsApp
                 </a>
                 <a
-                  href="mailto:gilson.mendes@gmail.com?subject=Séance découverte gratuite&body=Bonjour Gilson,%0D%0A%0D%0AJe suis intéressé(e) par votre séance découverte GRATUITE.%0D%0A%0D%0AComment ça se passe concrètement ? Quand pourrait-on faire ça ?%0D%0A%0D%0AMerci ! 😊%0D%0A"
+                  href="mailto:gilson.mendes-landim@hotmail.com?subject=Séance découverte gratuite&body=Bonjour Gilson,%0D%0A%0D%0AJe suis intéressé(e) par votre séance découverte GRATUITE.%0D%0A%0D%0AComment ça se passe concrètement ? Quand pourrait-on faire ça ?%0D%0A%0D%0AMerci ! 😊%0D%0A"
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   ✉️ Email
                 </a>
                 <a
                   href="tel:+33617043599"
-                  className="flex items-center px-3 py-2 bg-azure-500 hover:bg-azure-600 text-white rounded-lg text-xs font-medium transition-colors"
+                  className="flex items-center px-3 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   📞 Appeler
                 </a>
@@ -391,14 +366,14 @@ export default function BookingForm() {
                   📱 WhatsApp
                 </a>
                 <a
-                  href="mailto:gilson.mendes@gmail.com?subject=Question sur les équipements&body=Bonjour Gilson,%0D%0A%0D%0AJ'ai une question concernant les équipements pour les séances de coaching :%0D%0A%0D%0A- Fournissez-vous tout le matériel nécessaire ?%0D%0A- Que dois-je prévoir de mon côté ?%0D%0A- Pour les séances à domicile, amenez-vous tout ?%0D%0A%0D%0AMerci pour ces précisions !%0D%0A"
+                  href="mailto:gilson.mendes-landim@hotmail.com?subject=Question sur les équipements&body=Bonjour Gilson,%0D%0A%0D%0AJ'ai une question concernant les équipements pour les séances de coaching :%0D%0A%0D%0A- Fournissez-vous tout le matériel nécessaire ?%0D%0A- Que dois-je prévoir de mon côté ?%0D%0A- Pour les séances à domicile, amenez-vous tout ?%0D%0A%0D%0AMerci pour ces précisions !%0D%0A"
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   ✉️ Email
                 </a>
                 <a
                   href="tel:+33617043599"
-                  className="flex items-center px-3 py-2 bg-azure-500 hover:bg-azure-600 text-white rounded-lg text-xs font-medium transition-colors"
+                  className="flex items-center px-3 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-lg text-xs font-medium transition-colors"
                 >
                   📞 Appeler
                 </a>
@@ -407,43 +382,6 @@ export default function BookingForm() {
           </div>
         </motion.div>
 
-        {/* Contact rapide */}
-        <motion.div
-          className="text-center mt-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Ou contactez-moi directement :
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://wa.me/33617043599?text=Bonjour, je souhaite réserver une séance"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
-            >
-              <span className="mr-2">📱</span>
-              WhatsApp
-            </a>
-            <a
-              href="tel:+33617043599"
-              className="inline-flex items-center px-6 py-3 bg-azure-500 hover:bg-azure-600 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
-            >
-              <span className="mr-2">📞</span>
-              06 17 04 35 99
-            </a>
-            <a
-              href="mailto:gilson.mendes@gmail.com"
-              className="inline-flex items-center px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
-            >
-              <span className="mr-2">✉️</span>
-              Email
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

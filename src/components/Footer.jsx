@@ -50,10 +50,11 @@ const Footer = () => {
 
   const footerLinks = {
     services: [
-      { name: t('footer.services.personal'), href: "#services" },
-      { name: t('footer.services.group'), href: "#services" },
-      { name: t('footer.services.online'), href: "#services" },
-      { name: t('footer.services.nutrition'), href: "#services" }
+      { name: t('services.list.fitness.title', 'Remise en forme'), href: "#services" },
+      { name: t('services.list.pilates.title', 'Pilates'), href: "#services" },
+      { name: t('services.list.yoga.title', 'Yoga'), href: "#services" },
+      { name: t('services.list.strength.title', 'Renforcement musculaire'), href: "#services" },
+      { name: t('services.list.nutrition.title', 'Rééquilibrage alimentaire'), href: "#services" }
     ],
     company: [
       { name: t('footer.navigation.about'), href: "#about" },
@@ -259,7 +260,7 @@ const Footer = () => {
         >
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
             <div className="text-sm text-gray-300">
-              © {currentYear} GML Fitness. Tous droits réservés.
+              © {currentYear} GML — Le bien-être par le mouvement. Tous droits réservés.
             </div>
             
             <div className="flex flex-wrap justify-center gap-4 text-sm">

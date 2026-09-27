@@ -1,7 +1,6 @@
 import { useI18n } from '@/hooks/useI18n';
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1920&q=80&auto=format&fit=crop';
+const HERO_IMAGE = `${import.meta.env.BASE_URL}images/coach-conseil.jpg`;
 
 const Hero = () => {
   const { t } = useI18n();
@@ -11,20 +10,22 @@ const Hero = () => {
       <div className="hero__media" aria-hidden="true">
         <img
           src={HERO_IMAGE}
-          alt="Coach sportif en séance d'entraînement en salle de fitness"
-          width={1920}
-          height={1280}
+          alt="Gilson Mendes, coach sportif, conseillant deux clients en salle"
+          width={1680}
+          height={1120}
           fetchPriority="high"
         />
       </div>
       <div className="hero__overlay" aria-hidden="true" />
 
       <div className="hero__content container-max">
-        <p className="section-eyebrow text-white/80 reveal">Coach sportif · Côte d&apos;Azur</p>
+        <p className="section-eyebrow text-white/80 reveal">
+          {t('hero.eyebrow', 'Coach sportif à domicile · Services à la personne')}
+        </p>
 
         <h1 id="hero-heading" className="hero__title reveal reveal-delay-1">
-          {t('hero.title', 'Transformez votre')}{' '}
-          <span className="text-accent">{t('hero.titleHighlight', 'corps')}</span>
+          {t('hero.title', 'Corps · Esprit ·')}{' '}
+          <span className="hero__highlight">{t('hero.titleHighlight', 'Équilibre')}</span>
         </h1>
 
         <p className="hero__subtitle reveal reveal-delay-2">
@@ -38,23 +39,23 @@ const Hero = () => {
           <a href="#booking" className="btn btn-primary">
             {t('hero.cta.primary', 'Réserver une séance')}
           </a>
-          <a href="#programmes" className="btn btn-ghost-light">
+          <a href="#tarifs" className="btn btn-ghost-light">
             {t('hero.cta.secondary', 'Voir le programme')}
           </a>
         </div>
 
         <dl className="hero__stats reveal reveal-delay-4">
           <div>
-            <dt className="hero__stat-label">{t('hero.stats.clients', 'Clients transformés')}</dt>
-            <dd className="hero__stat-value m-0">200+</dd>
+            <dt className="hero__stat-label">{t('hero.stats.tax', 'Avantage fiscal')}</dt>
+            <dd className="hero__stat-value m-0">50%</dd>
+          </div>
+          <div>
+            <dt className="hero__stat-label">{t('hero.stats.price', 'Dès / séance')}</dt>
+            <dd className="hero__stat-value m-0">30 €</dd>
           </div>
           <div>
             <dt className="hero__stat-label">{t('hero.stats.experience', "Années d'expérience")}</dt>
             <dd className="hero__stat-value m-0">8+</dd>
-          </div>
-          <div>
-            <dt className="hero__stat-label">{t('hero.stats.success', 'Taux de réussite')}</dt>
-            <dd className="hero__stat-value m-0">95%</dd>
           </div>
         </dl>
       </div>

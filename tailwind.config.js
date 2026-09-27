@@ -36,7 +36,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Poppins', 'system-ui', 'sans-serif'],
         display: ['"Bebas Neue"', 'system-ui', 'sans-serif'],
       },
       maxWidth: {

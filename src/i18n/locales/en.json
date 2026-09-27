@@ -1,5 +1,6 @@
 {
   "nav": {
+    "avance": "Tax credit",
     "home": "Home",
     "services": "Services",
     "about": "About",
@@ -8,14 +9,17 @@
     "book": "Book Now"
   },
   "hero": {
-    "title": "Transform Your",
-    "titleHighlight": "Body",
-    "subtitle": "Professional fitness coach with 8+ years of experience. Personalized coaching, custom programs and nutritional guidance to reach your goals quickly.",
+    "eyebrow": "Home fitness coach · Personal services",
+    "title": "Body · Mind ·",
+    "titleHighlight": "Balance",
+    "subtitle": "One-to-one sessions at home to take care of your body and well-being: fitness, Pilates, yoga, strength training and nutritional rebalancing.",
     "cta": {
-      "primary": "Start Now",
-      "secondary": "Discover Services"
+      "primary": "Book a session",
+      "secondary": "See my packages"
     },
     "stats": {
+      "tax": "Tax benefit",
+      "price": "From / session",
       "clients": "Clients Transformed",
       "experience": "Years of Experience",
       "success": "Success Rate"
@@ -35,7 +39,16 @@
   "services": {
     "title": "My",
     "titleHighlight": "Services",
-    "subtitle": "Solutions adapted to all needs and budgets to accompany you towards your fitness and wellness goals.",
+    "eyebrow": "At-home sessions · Personal services",
+    "subtitle": "One-to-one sessions, at your home, to take care of your body and your well-being.",
+    "list": {
+      "fitness": { "title": "Getting back in shape", "description": "Regain energy, stamina and vitality with a progressive program adapted to your level." },
+      "pilates": { "title": "Pilates", "description": "Strengthen your core, improve your posture and gently gain mobility." },
+      "yoga": { "title": "Yoga", "description": "Postures, breathing and relaxation to release tension and restore body-mind balance." },
+      "strength": { "title": "Strength training", "description": "Tone and strengthen your body safely, with or without equipment, at home or outdoors." },
+      "nutrition": { "title": "Nutritional rebalancing", "description": "Simple, lasting advice to eat better every day, without frustration." }
+    },
+    "photo": { "badge": "Gilson Mendes", "caption": "One-to-one sessions at your home" },
     "items": {
       "personal": {
         "title": "Personal Training",

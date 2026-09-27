@@ -1,4 +1,8 @@
+import { LuHeartPulse, LuDumbbell, LuSalad, LuFlower2 } from 'react-icons/lu';
+import { GrYoga } from 'react-icons/gr';
 import { useI18n } from '@/hooks/useI18n';
+
+const SERVICES_IMAGE = `${import.meta.env.BASE_URL}images/yoga-triangle.jpg`;
 
 const Services = () => {
   const { t } = useI18n();
@@ -7,52 +11,34 @@ const Services = () => {
 
   const services = [
     {
-      icon: '💪',
-      titleKey: 'services.items.personal.title',
-      descriptionKey: 'services.items.personal.description',
-      featuresKeys: [
-        'services.items.personal.features.custom',
-        'services.items.personal.features.psychology',
-        'services.items.personal.features.mobility',
-        'services.items.personal.features.mindfulness',
-      ],
-      priceKey: 'services.items.personal.price',
+      Icon: LuHeartPulse,
+      key: 'fitness',
+      title: 'Remise en forme',
+      description: 'Retrouvez énergie, souffle et vitalité grâce à un programme progressif adapté à votre niveau.',
     },
     {
-      icon: '👥',
-      titleKey: 'services.items.group.title',
-      descriptionKey: 'services.items.group.description',
-      featuresKeys: [
-        'services.items.group.features.small',
-        'services.items.group.features.quality',
-        'services.items.group.features.affordable',
-        'services.items.group.features.motivation',
-      ],
-      priceKey: 'services.items.group.price',
+      Icon: GrYoga,
+      key: 'pilates',
+      title: 'Pilates',
+      description: 'Renforcez votre sangle abdominale, améliorez votre posture et gagnez en mobilité en douceur.',
     },
     {
-      icon: '🏠',
-      titleKey: 'services.items.online.title',
-      descriptionKey: 'services.items.online.description',
-      featuresKeys: [
-        'services.items.online.features.videos',
-        'services.items.online.features.plans',
-        'services.items.online.features.support',
-        'services.items.online.features.flexible',
-      ],
-      priceKey: 'services.items.online.price',
+      Icon: LuFlower2,
+      key: 'yoga',
+      title: 'Yoga',
+      description: "Postures, respiration et relaxation pour relâcher les tensions et retrouver l'équilibre corps-esprit.",
     },
     {
-      icon: '🏢',
-      titleKey: 'services.items.corporate.title',
-      descriptionKey: 'services.items.corporate.description',
-      featuresKeys: [
-        'services.items.corporate.features.corporate',
-        'services.items.corporate.features.associations',
-        'services.items.corporate.features.seniors',
-        'services.items.corporate.features.wellbeing',
-      ],
-      priceKey: 'services.items.corporate.price',
+      Icon: LuDumbbell,
+      key: 'strength',
+      title: 'Renforcement musculaire',
+      description: 'Tonifiez et renforcez votre corps en toute sécurité, avec ou sans matériel, à domicile ou en extérieur.',
+    },
+    {
+      Icon: LuSalad,
+      key: 'nutrition',
+      title: 'Rééquilibrage alimentaire',
+      description: 'Des conseils simples et durables pour mieux manger au quotidien, sans frustration.',
     },
   ];
 
@@ -60,7 +46,7 @@ const Services = () => {
     <section id="services" className="section-padding section-surface" aria-labelledby="services-heading">
       <div className="container-max">
         <header className="section-header reveal">
-          <p className="section-eyebrow">{t('services.eyebrow', 'Offres')}</p>
+          <p className="section-eyebrow">{t('services.eyebrow', 'Cours à domicile · Services à la personne')}</p>
           <h2 id="services-heading" className="section-title">
             {t('services.title', 'Mes')}{' '}
             <span className="text-accent">{t('services.titleHighlight', 'Services')}</span>
@@ -68,44 +54,41 @@ const Services = () => {
           <p className="section-subtitle">
             {t(
               'services.subtitle',
-              'Des solutions adaptées à tous les besoins pour vous accompagner vers vos objectifs de forme et de bien-être.'
+              'Des séances individuelles, chez vous, pour prendre soin de votre corps et de votre bien-être.'
             )}
           </p>
         </header>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service, index) => (
-            <article
-              key={service.titleKey}
-              className={`card p-8 reveal${delayClass[index + 1] || ''}`}
-            >
-              <div className="flex items-start gap-4 mb-6">
-                <span className="text-4xl" aria-hidden="true">{service.icon}</span>
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-12 items-start">
+          <ul className="services-list list-none m-0 p-0">
+            {services.map(({ Icon, key, title, description }, index) => (
+              <li key={key} className={`services-list__item card reveal${delayClass[index] || ''}`}>
+                <span className="services-list__icon" aria-hidden="true">
+                  <Icon />
+                </span>
                 <div>
-                  <h3 className="font-display text-2xl tracking-wide text-[var(--color-text)] m-0 mb-2">
-                    {t(service.titleKey)}
-                  </h3>
-                  <p className="text-muted text-sm leading-relaxed m-0">{t(service.descriptionKey)}</p>
+                  <h3 className="services-list__title">{t(`services.list.${key}.title`, title)}</h3>
+                  <p className="text-muted text-sm leading-relaxed m-0">
+                    {t(`services.list.${key}.description`, description)}
+                  </p>
                 </div>
-              </div>
+              </li>
+            ))}
+          </ul>
 
-              <ul className="space-y-2 mb-8 list-none p-0 m-0">
-                {service.featuresKeys.map((featureKey) => (
-                  <li key={featureKey} className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-                    <span className="text-accent shrink-0" aria-hidden="true">✓</span>
-                    {t(featureKey)}
-                  </li>
-                ))}
-              </ul>
-
-              <footer className="border-t border-[var(--color-border)] pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <p className="font-display text-3xl text-accent m-0">{t(service.priceKey)}</p>
-                <a href="#booking" className="btn btn-primary sm:shrink-0">
-                  {t('services.choose', 'Choisir ce service')}
-                </a>
-              </footer>
-            </article>
-          ))}
+          <figure className="services-photo reveal reveal-delay-2">
+            <img
+              src={SERVICES_IMAGE}
+              alt="Gilson Mendes en séance de yoga individuelle en extérieur avec une cliente"
+              width={533}
+              height={800}
+              loading="lazy"
+            />
+            <figcaption>
+              <span className="services-photo__badge">{t('services.photo.badge', 'Gilson Mendes')}</span>
+              {t('services.photo.caption', 'Séances individuelles à votre domicile')}
+            </figcaption>
+          </figure>
         </div>
 
         <aside className="card mt-12 p-8 text-center reveal">
