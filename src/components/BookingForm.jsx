@@ -43,18 +43,12 @@ export default function BookingForm() {
                 <p className="formule-card__price">
                   {formule.price} €<span className="formule-card__unit">/ séance</span>
                 </p>
-                <p className="formule-card__total">
-                  Prix réel : {formule.price * 2} € / séance
-                  <br />
-                  Vous payez {(formule.sessions * formule.price).toLocaleString('fr-FR')} € au lieu de{' '}
-                  {(formule.sessions * formule.price * 2).toLocaleString('fr-FR')} €
-                </p>
+                <p className="formule-card__total">au lieu de {formule.price * 2} € / séance</p>
               </article>
             ))}
           </div>
           <p className="formules__note">
-            Tarifs affichés après crédit d&apos;impôt de 50 % (services à la personne), sous réserve des conditions d&apos;éligibilité.
-            Avec l&apos;<a href="#avance-immediate" className="link">Avance immédiate</a>, vous ne payez que ce montant, tout de suite.
+            Les tarifs affichés sont déjà réduits de 50 %, sous réserve des conditions d&apos;éligibilité.
           </p>
 
           <aside className="sap-banner reveal" aria-label="Avantage fiscal services à la personne">
