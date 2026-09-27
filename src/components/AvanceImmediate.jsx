@@ -23,6 +23,11 @@ const LINKS = [
     label: 'servicesalapersonne.gouv.fr',
     hint: 'Le site officiel des services à la personne',
   },
+  {
+    href: 'https://www.impots.gouv.fr/portail/particulier/emploi-domicile',
+    label: 'Plafonds du crédit d’impôt',
+    hint: 'La page officielle sur impots.gouv.fr',
+  },
 ];
 
 const STEPS = [
@@ -32,15 +37,15 @@ const STEPS = [
   },
   {
     title: 'Vous activez votre compte',
-    text: 'Vous recevez un e-mail pour activer votre espace en ligne sur particulier.urssaf.fr.',
+    text: 'Vous recevez un e-mail pour activer votre compte sur le site dédié www.particulier.urssaf.fr.',
   },
   {
     title: 'Je vous envoie la demande de paiement',
-    text: 'Après vos séances, votre crédit d’impôt de 50 % est déjà déduit. L’Urssaf vous prévient par e-mail ou SMS.',
+    text: 'Après vos séances, vous recevez la demande de paiement sur votre compte particulier.urssaf.fr, crédit d’impôt de 50 % déjà déduit.',
   },
   {
     title: 'Vous validez en 48 h',
-    text: 'Vous vérifiez et validez en ligne. Sans réponse sous 48 h, la demande est validée automatiquement.',
+    text: 'Vous avez 48 h pour valider ou contester la demande. Sans réponse, elle est validée automatiquement.',
   },
   {
     title: 'Vous ne payez que la moitié',
@@ -115,7 +120,8 @@ const AvanceImmediate = () => (
             <li><LuCheck aria-hidden="true" /> Crédit d&apos;impôt de 50 %, dans la limite de 12 000 € de dépenses par an (plafond majoré dans certains cas, par exemple en situation de handicap)</li>
             <li><LuCheck aria-hidden="true" /> Vous suivez votre crédit d&apos;impôt consommé et disponible sur particulier.urssaf.fr</li>
             <li><LuCheck aria-hidden="true" /> Vous recevez chaque année votre attestation fiscale</li>
-            <li><LuCheck aria-hidden="true" /> Je reste votre interlocuteur pour toute question</li>
+            <li><LuCheck aria-hidden="true" /> En cas de question, votre interlocuteur reste GM Fitness, votre organisme de services à la personne</li>
+            <li><LuCheck aria-hidden="true" /> Plafonds du crédit d&apos;impôt :{' '}<a href="https://www.impots.gouv.fr/portail/particulier/emploi-domicile" target="_blank" rel="noopener noreferrer" className="underline">impots.gouv.fr/portail/particulier/emploi-domicile</a></li>
           </ul>
         </article>
 
@@ -152,7 +158,9 @@ const AvanceImmediate = () => (
         <p>
           <strong>L&apos;Avance immédiate, un service proposé par l&apos;Urssaf.</strong>
           <br />
-          Service optionnel et gratuit, mis en place par l&apos;Urssaf et la Direction générale des Finances publiques.
+          Service mis en place par l&apos;Urssaf et la Direction générale des Finances publiques. Ce service est gratuit et non obligatoire.
+          <br />
+          <small>Gilson Mendes, organisme de services à la personne déclaré sous le n° SAP919560623 · SIRET 919 560 623 00010</small>
         </p>
       </aside>
     </div>
