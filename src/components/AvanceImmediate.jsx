@@ -120,7 +120,7 @@ const AvanceImmediate = () => (
             <li><LuCheck aria-hidden="true" /> Crédit d&apos;impôt de 50 %, dans la limite de 12 000 € de dépenses par an (plafond majoré dans certains cas, par exemple en situation de handicap)</li>
             <li><LuCheck aria-hidden="true" /> Vous suivez votre crédit d&apos;impôt consommé et disponible sur particulier.urssaf.fr</li>
             <li><LuCheck aria-hidden="true" /> Vous recevez chaque année votre attestation fiscale</li>
-            <li><LuCheck aria-hidden="true" /> En cas de question, votre interlocuteur reste GM Fitness, votre organisme de services à la personne</li>
+            <li><LuCheck aria-hidden="true" /> En cas de question, votre interlocuteur reste Gilson Mendes, votre organisme de services à la personne</li>
             <li><LuCheck aria-hidden="true" /> Plafonds du crédit d&apos;impôt :{' '}<a href="https://www.impots.gouv.fr/portail/particulier/emploi-domicile" target="_blank" rel="noopener noreferrer" className="underline">impots.gouv.fr/portail/particulier/emploi-domicile</a></li>
           </ul>
         </article>
