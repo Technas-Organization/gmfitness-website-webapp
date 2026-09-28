@@ -108,7 +108,7 @@ const AvanceImmediate = () => (
 
       <div className="grid lg:grid-cols-2 gap-6 mt-12">
         {/* Conditions & bon à savoir */}
-        <article className="card p-6 sm:p-8 reveal">
+        <article className="card p-6 sm:p-8 min-w-0 reveal">
           <h3 className="avance-card-title">Qui peut en bénéficier ?</h3>
           <ul className="avance-checklist">
             <li><LuCheck aria-hidden="true" /> Avoir un compte bancaire domicilié en France</li>
@@ -121,12 +121,12 @@ const AvanceImmediate = () => (
             <li><LuCheck aria-hidden="true" /> Vous suivez votre crédit d&apos;impôt consommé et disponible sur particulier.urssaf.fr</li>
             <li><LuCheck aria-hidden="true" /> Vous recevez chaque année votre attestation fiscale</li>
             <li><LuCheck aria-hidden="true" /> En cas de question, votre interlocuteur reste Gilson Mendes, votre organisme de services à la personne</li>
-            <li><LuCheck aria-hidden="true" /> Plafonds du crédit d&apos;impôt :{' '}<a href="https://www.impots.gouv.fr/portail/particulier/emploi-domicile" target="_blank" rel="noopener noreferrer" className="underline">impots.gouv.fr/portail/particulier/emploi-domicile</a></li>
+            <li><LuCheck aria-hidden="true" /> Plafonds du crédit d&apos;impôt :{' '}<a href="https://www.impots.gouv.fr/portail/particulier/emploi-domicile" target="_blank" rel="noopener noreferrer" className="underline">voir sur impots.gouv.fr</a></li>
           </ul>
         </article>
 
         {/* Liens utiles */}
-        <article className="card p-6 sm:p-8 reveal reveal-delay-1">
+        <article className="card p-6 sm:p-8 min-w-0 reveal reveal-delay-1">
           <h3 className="avance-card-title">Liens utiles</h3>
           <ul className="avance-links list-none m-0 p-0">
             {LINKS.map((link) => (
