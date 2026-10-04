@@ -51,7 +51,7 @@ const Hero = () => {
           </div>
           <div>
             <dt className="hero__stat-label">{t('hero.stats.price', 'Dès / séance')}</dt>
-            <dd className="hero__stat-value m-0">30 €</dd>
+            <dd className="hero__stat-value m-0">35 €</dd>
           </div>
           <div>
             <dt className="hero__stat-label">{t('hero.stats.experience', "Années d'expérience")}</dt>

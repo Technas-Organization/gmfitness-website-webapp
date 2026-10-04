@@ -6,11 +6,32 @@ import { LuPhone } from 'react-icons/lu';
 /**
  * Tarifs (formules services à la personne) et réservation directe
  */
+// Prix facturés ; le client paie la moitié après crédit d'impôt (services à la personne)
 const FORMULES = [
-  { sessions: 20, price: 30, featured: true },
-  { sessions: 15, price: 35 },
-  { sessions: 10, price: 40 },
+  { id: 'unite', label: "Séance à l'unité", sessions: 1, perSession: 90 },
+  { id: 'forfait-5', label: 'Forfait 5 séances', sessions: 5, perSession: 80 },
+  { id: 'forfait-10', label: 'Forfait 10 séances', sessions: 10, perSession: 70, featured: true },
 ];
+
+const ZONES = [
+  {
+    name: 'Zone 1',
+    supplement: 'Sans supplément',
+    towns: 'Mouans-Sartoux, Mougins, Grasse, Cannes, Le Cannet, Antibes, Juan-les-Pins, Valbonne',
+  },
+  {
+    name: 'Zone 2',
+    supplement: '+10 € / séance (5 € après crédit d’impôt)',
+    towns: 'Villeneuve-Loubet, Biot, Cagnes-sur-Mer',
+  },
+  {
+    name: 'Zone 3',
+    supplement: '+20 € / séance (10 € après crédit d’impôt)',
+    towns: 'Saint-Laurent-du-Var, Nice — uniquement en forfaits',
+  },
+];
+
+const euros = (n) => `${n.toLocaleString('fr-FR')} €`;
 
 export default function BookingForm() {
   return (
@@ -36,20 +57,50 @@ export default function BookingForm() {
           <div className="grid sm:grid-cols-3 gap-4 lg:gap-6">
             {FORMULES.map((formule, index) => (
               <article
-                key={formule.sessions}
+                key={formule.id}
                 className={`formule-card reveal${index ? ` reveal-delay-${index}` : ''}${formule.featured ? ' formule-card--featured' : ''}`}
               >
-                <header className="formule-card__head">{formule.sessions} séances</header>
+                <header className="formule-card__head">{formule.label}</header>
+                {formule.featured && <p className="formule-card__badge">Le plus avantageux</p>}
                 <p className="formule-card__price">
-                  {formule.price} €<span className="formule-card__unit">/ séance</span>
+                  {euros(formule.perSession / 2)}
+                  <span className="formule-card__unit">/ séance*</span>
                 </p>
-                <p className="formule-card__total">au lieu de {formule.price * 2} € / séance</p>
+                <p className="formule-card__total">
+                  au lieu de {euros(formule.perSession)} / séance
+                  {formule.sessions > 1 && (
+                    <>
+                      <br />
+                      Forfait : {euros(formule.sessions * formule.perSession)}, soit{' '}
+                      {euros((formule.sessions * formule.perSession) / 2)} après crédit d&apos;impôt
+                    </>
+                  )}
+                </p>
               </article>
             ))}
           </div>
           <p className="formules__note">
-            Les tarifs affichés sont déjà réduits de 50 %, sous réserve des conditions d&apos;éligibilité.
+            * Prix après crédit d&apos;impôt de 50 % (services à la personne), sous réserve des conditions d&apos;éligibilité.
+            Remboursé par les impôts, ou déduit tout de suite avec l&apos;
+            <a href="#avance-immediate" className="link">Avance immédiate</a> (bientôt disponible).
           </p>
+
+          <div className="zones reveal" aria-labelledby="zones-heading">
+            <h4 id="zones-heading" className="zones__title">Zones de déplacement</h4>
+            <p className="zones__intro">
+              Je me déplace chez vous depuis Mouans-Sartoux. Le supplément de déplacement est lui aussi éligible au crédit
+              d&apos;impôt.
+            </p>
+            <ul className="zones__list">
+              {ZONES.map((zone) => (
+                <li key={zone.name} className="zones__item">
+                  <p className="zones__name">{zone.name}</p>
+                  <p className="zones__supplement">{zone.supplement}</p>
+                  <p className="zones__towns">{zone.towns}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <aside className="sap-banner reveal" aria-label="Avantage fiscal services à la personne">
             <img
@@ -63,7 +114,7 @@ export default function BookingForm() {
             <p className="sap-banner__pct" aria-hidden="true">50%</p>
             <p className="sap-banner__text">
               Des prestations éligibles aux dispositifs de <strong>services à la personne</strong> avec un{' '}
-              <strong className="text-accent">avantage fiscal de 50 %</strong> sur vos dépenses, déduit immédiatement
+              <strong className="text-accent">avantage fiscal de 50 %</strong> sur vos dépenses, bientôt déduit immédiatement
               grâce à l&apos;<a href="#avance-immediate" className="link">Avance immédiate</a>.
             </p>
           </aside>

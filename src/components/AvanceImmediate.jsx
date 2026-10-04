@@ -62,6 +62,7 @@ const AvanceImmediate = () => (
     <div className="container-max">
       <header className="section-header reveal">
         <p className="section-eyebrow">Crédit d&apos;impôt immédiat</p>
+        <p className="avance-soon">Bientôt disponible</p>
         <h2 id="avance-heading" className="section-title">
           L&apos;Avance <span className="text-sea">immédiate</span>
         </h2>
@@ -70,28 +71,31 @@ const AvanceImmediate = () => (
           immédiate, il est déduit <strong>tout de suite</strong> : plus besoin d&apos;attendre l&apos;année
           suivante.
         </p>
+        <p className="text-sm text-muted mt-3">
+          Ma demande d&apos;habilitation auprès de l&apos;Urssaf est en cours : ce service sera proposé dès son accord.
+        </p>
       </header>
 
       {/* Comparaison avant / après */}
       <div className="avance-compare reveal">
         <article className="avance-compare__card">
           <h3 className="avance-compare__label">Sans Avance immédiate</h3>
-          <p className="avance-compare__amount">60 €</p>
+          <p className="avance-compare__amount">70 €</p>
           <p className="avance-compare__detail">
-            payés par séance, puis 30 € remboursés par les impôts… l&apos;année suivante.
+            payés par séance, puis 35 € remboursés par les impôts… l&apos;année suivante.
           </p>
         </article>
         <span className="avance-compare__arrow" aria-hidden="true">→</span>
         <article className="avance-compare__card avance-compare__card--good">
           <h3 className="avance-compare__label">Avec l&apos;Avance immédiate</h3>
-          <p className="avance-compare__amount">30 €</p>
+          <p className="avance-compare__amount">35 €</p>
           <p className="avance-compare__detail">
             payés par séance, et c&apos;est tout. Le crédit d&apos;impôt est déduit immédiatement.
           </p>
         </article>
       </div>
       <p className="text-center text-sm text-muted mt-4 mb-12">
-        Exemple pour une séance à 60 € (formule 20 séances). Service optionnel et gratuit.
+        Exemple pour une séance à 70 € (forfait 10 séances). Service optionnel et gratuit.
       </p>
 
       {/* Étapes */}
@@ -142,12 +146,12 @@ const AvanceImmediate = () => (
             ))}
           </ul>
           <a
-            href="https://wa.me/33617043599?text=Bonjour Gilson, je souhaite bénéficier de l'Avance immédiate pour mes séances à domicile."
+            href="https://wa.me/33617043599?text=Bonjour Gilson, je souhaite être prévenu(e) dès que l'Avance immédiate sera disponible pour mes séances à domicile."
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary w-full mt-6"
           >
-            Je veux en profiter
+            Être prévenu dès l&apos;ouverture
           </a>
         </article>
       </div>
