@@ -20,7 +20,7 @@ const Hero = () => {
 
       <div className="hero__content container-max">
         <p className="section-eyebrow text-white/80 reveal">
-          {t('hero.eyebrow', 'Coach sportif à domicile · Services à la personne')}
+          {t('hero.eyebrow', "Coach sportif à domicile · Côte d'Azur")}
         </p>
 
         <h1 id="hero-heading" className="hero__title reveal reveal-delay-1">
@@ -46,12 +46,12 @@ const Hero = () => {
 
         <dl className="hero__stats reveal reveal-delay-4">
           <div>
-            <dt className="hero__stat-label">{t('hero.stats.tax', 'Avantage fiscal')}</dt>
-            <dd className="hero__stat-value m-0">50%</dd>
+            <dt className="hero__stat-label">{t('hero.stats.rating', 'Avis Google')}</dt>
+            <dd className="hero__stat-value m-0">5/5</dd>
           </div>
           <div>
             <dt className="hero__stat-label">{t('hero.stats.price', 'Dès / séance')}</dt>
-            <dd className="hero__stat-value m-0">35 €</dd>
+            <dd className="hero__stat-value m-0">50 €</dd>
           </div>
           <div>
             <dt className="hero__stat-label">{t('hero.stats.experience', "Années d'expérience")}</dt>

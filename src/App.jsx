@@ -10,7 +10,6 @@ const Services = React.lazy(() => import('./components/Services'));
 const VideoSection = React.lazy(() => import('./components/VideoSection'));
 const TestimonialsSection = React.lazy(() => import('./components/testimonials/TestimonialsSection'));
 const BookingForm = React.lazy(() => import('./components/BookingForm'));
-const AvanceImmediate = React.lazy(() => import('./components/AvanceImmediate'));
 const About = React.lazy(() => import('./components/About'));
 const Contact = React.lazy(() => import('./components/Contact'));
 const Footer = React.lazy(() => import('./components/Footer'));
@@ -54,10 +53,6 @@ function App() {
 
           <Suspense fallback={<SectionFallback message="Chargement des tarifs…" />}>
             <BookingForm />
-          </Suspense>
-
-          <Suspense fallback={<SectionFallback message="Chargement…" />}>
-            <AvanceImmediate />
           </Suspense>
 
           <Suspense fallback={<SectionFallback message="Chargement…" />}>

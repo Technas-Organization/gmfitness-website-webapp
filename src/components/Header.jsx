@@ -10,7 +10,6 @@ const Header = () => {
   const navItems = [
     { href: '#services', label: t('nav.services') },
     { href: '#tarifs', label: t('nav.pricing', 'Tarifs') },
-    { href: '#avance-immediate', label: t('nav.avance', 'Avance immédiate') },
     { href: '#about', label: t('nav.about') },
     { href: '#programmes', label: t('nav.programmes', 'Programmes') },
     { href: '#contact', label: t('nav.contact') },

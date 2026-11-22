@@ -4,31 +4,12 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { LuPhone } from 'react-icons/lu';
 
 /**
- * Tarifs (formules services à la personne) et réservation directe
+ * Tarifs du coaching à domicile et réservation directe
  */
-// Prix facturés ; le client paie la moitié après crédit d'impôt (services à la personne)
 const FORMULES = [
-  { id: 'unite', label: "Séance à l'unité", sessions: 1, perSession: 90 },
-  { id: 'forfait-5', label: 'Forfait 5 séances', sessions: 5, perSession: 80 },
-  { id: 'forfait-10', label: 'Forfait 10 séances', sessions: 10, perSession: 70, featured: true },
-];
-
-const ZONES = [
-  {
-    name: 'Zone 1',
-    supplement: 'Sans supplément',
-    towns: 'Mouans-Sartoux, Mougins, Grasse, Cannes, Le Cannet, Antibes, Juan-les-Pins, Valbonne',
-  },
-  {
-    name: 'Zone 2',
-    supplement: '+10 € / séance (5 € après crédit d’impôt)',
-    towns: 'Villeneuve-Loubet, Biot, Cagnes-sur-Mer',
-  },
-  {
-    name: 'Zone 3',
-    supplement: '+20 € / séance (10 € après crédit d’impôt)',
-    towns: 'Saint-Laurent-du-Var, Nice — uniquement en forfaits',
-  },
+  { id: 'unite', label: "Séance à l'unité", sessions: 1, perSession: 70 },
+  { id: 'forfait-5', label: 'Forfait 5 séances', sessions: 5, perSession: 60 },
+  { id: 'forfait-10', label: 'Forfait 10 séances', sessions: 10, perSession: 50, featured: true },
 ];
 
 const euros = (n) => `${n.toLocaleString('fr-FR')} €`;
@@ -47,11 +28,11 @@ export default function BookingForm() {
             Réservez votre <span className="text-accent">séance</span>
           </h2>
           <p className="section-subtitle">
-            Des cours individuels à domicile, éligibles aux services à la personne.
+            Des cours individuels à domicile, partout sur la Côte d&apos;Azur.
           </p>
         </header>
 
-        {/* Formules — Services à la personne */}
+        {/* Formules */}
         <div className="formules mb-10">
           <h3 className="formules__title reveal">Mes formules</h3>
           <div className="grid sm:grid-cols-3 gap-4 lg:gap-6">
@@ -63,61 +44,19 @@ export default function BookingForm() {
                 <header className="formule-card__head">{formule.label}</header>
                 {formule.featured && <p className="formule-card__badge">Le plus avantageux</p>}
                 <p className="formule-card__price">
-                  {euros(formule.perSession / 2)}
-                  <span className="formule-card__unit">/ séance*</span>
+                  {euros(formule.perSession)}
+                  <span className="formule-card__unit">/ séance</span>
                 </p>
                 <p className="formule-card__total">
-                  au lieu de {euros(formule.perSession)} / séance
-                  {formule.sessions > 1 && (
-                    <>
-                      <br />
-                      Forfait : {euros(formule.sessions * formule.perSession)}, soit{' '}
-                      {euros((formule.sessions * formule.perSession) / 2)} après crédit d&apos;impôt
-                    </>
-                  )}
+                  {formule.sessions > 1
+                    ? `${euros(formule.sessions * formule.perSession)} les ${formule.sessions} séances`
+                    : 'Séance individuelle d’1 heure'}
                 </p>
               </article>
             ))}
           </div>
-          <p className="formules__note">
-            * Prix après crédit d&apos;impôt de 50 % (services à la personne), sous réserve des conditions d&apos;éligibilité.
-            Remboursé par les impôts, ou déduit tout de suite avec l&apos;
-            <a href="#avance-immediate" className="link">Avance immédiate</a> (bientôt disponible).
-          </p>
+          <p className="formules__note">Séances d&apos;1 heure à votre domicile ou en extérieur.</p>
 
-          <div className="zones reveal" aria-labelledby="zones-heading">
-            <h4 id="zones-heading" className="zones__title">Zones de déplacement</h4>
-            <p className="zones__intro">
-              Je me déplace chez vous depuis Mouans-Sartoux. Le supplément de déplacement est lui aussi éligible au crédit
-              d&apos;impôt.
-            </p>
-            <ul className="zones__list">
-              {ZONES.map((zone) => (
-                <li key={zone.name} className="zones__item">
-                  <p className="zones__name">{zone.name}</p>
-                  <p className="zones__supplement">{zone.supplement}</p>
-                  <p className="zones__towns">{zone.towns}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <aside className="sap-banner reveal" aria-label="Avantage fiscal services à la personne">
-            <img
-              src={`${import.meta.env.BASE_URL}images/logo-sap.jpg`}
-              alt="Logo Services à la personne"
-              width={1626}
-              height={1373}
-              loading="lazy"
-              className="sap-banner__logo"
-            />
-            <p className="sap-banner__pct" aria-hidden="true">50%</p>
-            <p className="sap-banner__text">
-              Des prestations éligibles aux dispositifs de <strong>services à la personne</strong> avec un{' '}
-              <strong className="text-accent">avantage fiscal de 50 %</strong> sur vos dépenses, bientôt déduit immédiatement
-              grâce à l&apos;<a href="#avance-immediate" className="link">Avance immédiate</a>.
-            </p>
-          </aside>
         </div>
 
         {/* Réservation directe — WhatsApp ou téléphone */}

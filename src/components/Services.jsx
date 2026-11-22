@@ -46,7 +46,7 @@ const Services = () => {
     <section id="services" className="section-padding section-surface" aria-labelledby="services-heading">
       <div className="container-max">
         <header className="section-header reveal">
-          <p className="section-eyebrow">{t('services.eyebrow', 'Cours à domicile · Services à la personne')}</p>
+          <p className="section-eyebrow">{t('services.eyebrow', "Cours à domicile · Côte d'Azur")}</p>
           <h2 id="services-heading" className="section-title">
             {t('services.title', 'Mes')}{' '}
             <span className="text-accent">{t('services.titleHighlight', 'Services')}</span>

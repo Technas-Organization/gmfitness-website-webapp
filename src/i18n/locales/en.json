@@ -1,6 +1,5 @@
 {
   "nav": {
-    "avance": "Tax credit",
     "home": "Home",
     "services": "Services",
     "about": "About",
@@ -9,7 +8,7 @@
     "book": "Book Now"
   },
   "hero": {
-    "eyebrow": "Home fitness coach · Personal services",
+    "eyebrow": "Home fitness coach · French Riviera",
     "title": "Body · Mind ·",
     "titleHighlight": "Balance",
     "subtitle": "One-to-one sessions at home to take care of your body and well-being: fitness, Pilates, yoga, strength training and nutritional rebalancing.",
@@ -18,7 +17,7 @@
       "secondary": "See my packages"
     },
     "stats": {
-      "tax": "Tax benefit",
+      "rating": "Google reviews",
       "price": "From / session",
       "clients": "Clients Transformed",
       "experience": "Years of Experience",
@@ -39,7 +38,7 @@
   "services": {
     "title": "My",
     "titleHighlight": "Services",
-    "eyebrow": "At-home sessions · Personal services",
+    "eyebrow": "At-home sessions · French Riviera",
     "subtitle": "One-to-one sessions, at your home, to take care of your body and your well-being.",
     "list": {
       "fitness": { "title": "Getting back in shape", "description": "Regain energy, stamina and vitality with a progressive program adapted to your level." },

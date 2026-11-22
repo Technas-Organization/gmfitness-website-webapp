@@ -1,6 +1,5 @@
 {
   "nav": {
-    "avance": "Avance immédiate",
     "home": "Accueil",
     "services": "Services",
     "about": "À propos",
@@ -11,7 +10,7 @@
     "book": "Réserver"
   },
   "hero": {
-    "eyebrow": "Coach sportif à domicile · Services à la personne",
+    "eyebrow": "Coach sportif à domicile · Côte d'Azur",
     "title": "Corps · Esprit ·",
     "titleHighlight": "Équilibre",
     "subtitle": "Des cours individuels à domicile pour prendre soin de votre corps et de votre bien-être : remise en forme, Pilates, yoga, renforcement musculaire et rééquilibrage alimentaire.",
@@ -20,7 +19,7 @@
       "secondary": "Voir mes formules"
     },
     "stats": {
-      "tax": "Avantage fiscal",
+      "rating": "Avis Google",
       "price": "Dès / séance",
       "clients": "Clients Transformés",
       "experience": "Années d'expérience",
@@ -41,7 +40,7 @@
   "services": {
     "title": "Mes",
     "titleHighlight": "Services",
-    "eyebrow": "Cours à domicile · Services à la personne",
+    "eyebrow": "Cours à domicile · Côte d'Azur",
     "subtitle": "Des séances individuelles, chez vous, pour prendre soin de votre corps et de votre bien-être.",
     "list": {
       "fitness": { "title": "Remise en forme", "description": "Retrouvez énergie, souffle et vitalité grâce à un programme progressif adapté à votre niveau." },
