@@ -12,6 +12,18 @@ const FORMULES = [
   { id: 'forfait-10', label: 'Forfait 10 séances', sessions: 10, perSession: 50, featured: true },
 ];
 
+// Cours collectifs au cabinet de kinésithérapie du Cannet
+const COURS_GROUPE = [
+  { day: 'Mardi', slots: ['17h00 · Renforcement musculaire', '18h00 · Pilates', '19h10 · Yoga'] },
+  { day: 'Samedi matin', slots: ['09h30 · Renforcement musculaire', '10h30 · Pilates', '11h30 · Yoga'] },
+];
+
+const TARIFS_GROUPE = [
+  { label: '1 cours', price: 20 },
+  { label: '5 cours', price: 90 },
+  { label: '10 cours', price: 170 },
+];
+
 const euros = (n) => `${n.toLocaleString('fr-FR')} €`;
 
 export default function BookingForm() {
@@ -28,13 +40,13 @@ export default function BookingForm() {
             Réservez votre <span className="text-accent">séance</span>
           </h2>
           <p className="section-subtitle">
-            Des cours individuels à domicile, partout sur la Côte d&apos;Azur.
+            Coaching individuel à domicile partout sur la Côte d&apos;Azur, ou cours en petit groupe au Cannet.
           </p>
         </header>
 
         {/* Formules */}
         <div className="formules mb-10">
-          <h3 className="formules__title reveal">Mes formules</h3>
+          <h3 className="formules__title reveal">Coaching à domicile</h3>
           <div className="grid sm:grid-cols-3 gap-4 lg:gap-6">
             {FORMULES.map((formule, index) => (
               <article
@@ -56,12 +68,54 @@ export default function BookingForm() {
             ))}
           </div>
           <p className="formules__note">Séances d&apos;1 heure à votre domicile ou en extérieur.</p>
+        </div>
 
+        {/* Cours en petit groupe */}
+        <div id="cours-groupe" className="formules mb-10 scroll-mt-[var(--header-height)]">
+          <h3 className="formules__title reveal">Cours en petit groupe</h3>
+          <div className="groupe reveal">
+            <div className="groupe__info">
+              <p className="groupe__lead">
+                Pilates, yoga et renforcement musculaire en petit groupe de 3 à 5 personnes, tous niveaux, au cabinet
+                de kinésithérapie du Cannet.
+              </p>
+              <p className="groupe__address">📍 631 avenue du Général de Gaulle, 06110 Le Cannet</p>
+              <div className="groupe__planning">
+                {COURS_GROUPE.map((jour) => (
+                  <div key={jour.day} className="groupe__day">
+                    <p className="groupe__day-name">{jour.day}</p>
+                    <ul className="groupe__slots">
+                      {jour.slots.map((slot) => (
+                        <li key={slot}>{slot}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="groupe__prices">
+              {TARIFS_GROUPE.map((tarif) => (
+                <p key={tarif.label} className="groupe__price">
+                  <span>{tarif.label}</span>
+                  <strong>{euros(tarif.price)}</strong>
+                </p>
+              ))}
+              <p className="groupe__note">Séance d&apos;essai gratuite · Places limitées</p>
+              <a
+                href="https://wa.me/33617043599?text=Bonjour Gilson, je souhaite réserver une place pour un cours en groupe au Cannet."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary w-full"
+              >
+                Réserver ma place
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Réservation directe — WhatsApp ou téléphone */}
         <aside className="booking-cta reveal" aria-labelledby="booking-cta-heading">
-          <h3 id="booking-cta-heading" className="booking-cta__title">Réservez votre séance à domicile</h3>
+          <h3 id="booking-cta-heading" className="booking-cta__title">Réservez votre séance</h3>
           <p className="booking-cta__text">
             Envoyez-moi un message ou appelez-moi : nous choisissons ensemble votre formule et vos créneaux,
             et je me déplace chez vous.
